@@ -29,6 +29,8 @@
       scroll-behavior: smooth;
       -webkit-tap-highlight-color: transparent;
       text-size-adjust: 100%;
+      overflow-x: hidden;
+      overscroll-behavior: none;
     }
 
     body {
@@ -37,6 +39,8 @@
       font-family: var(--body);
       font-weight: 300;
       overflow-x: hidden;
+      max-width: 100%;
+      touch-action: pan-y;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -311,10 +315,12 @@
     .lookbook {
       display: flex;
       overflow-x: scroll;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       cursor: grab;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x;
     }
     .lookbook:active { cursor: grabbing; }
     .lookbook::-webkit-scrollbar { display: none; }
@@ -369,15 +375,18 @@
       position: absolute;
       bottom: 0; left: 0; right: 0;
       padding: 22px 22px 30px;
+      transform: translateY(14px);
+      opacity: 0;
+      transition: transform 0.55s cubic-bezier(.25,.46,.45,.94),
+                  opacity   0.55s cubic-bezier(.25,.46,.45,.94);
     }
 
-    .piece-num {
-      font-family: var(--display);
-      font-size: 0.6rem;
-      color: rgba(250,247,243,.45);
-      letter-spacing: 0.22em;
-      margin-bottom: 5px;
+    .piece.active .piece-body {
+      transform: translateY(0);
+      opacity: 1;
     }
+
+    .piece-num { display: none; }
 
     .piece-name {
       font-family: var(--display);
@@ -627,7 +636,7 @@
 <nav>
   <a class="nav-logo" href="#">NOVAë</a>
   <div class="nav-right">
-    <button class="lang-btn" id="langBtn" aria-label="Switch language">SQ</button>
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">AL</button>
     <a class="nav-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5.5"/>
@@ -641,8 +650,8 @@
 <!-- ═══ HERO ════════════════════════════════════════════ -->
 <section class="hero">
   <p class="hero-eyebrow">
-    <span class="t-en">Tirana, Albania &nbsp;·&nbsp; Est. 2024</span>
-    <span class="t-sq">Tiranë, Shqipëri &nbsp;·&nbsp; Est. 2024</span>
+    <span class="t-en">Tirana, Albania &nbsp;·&nbsp; Est. 2026</span>
+    <span class="t-sq">Tiranë, Shqipëri &nbsp;·&nbsp; Est. 2026</span>
   </p>
   <h1 class="hero-wordmark">NOVAë</h1>
   <div class="hero-divider"></div>
@@ -666,8 +675,8 @@
 <!-- ═══ COLLECTION INTRO ════════════════════════════════ -->
 <section class="col-intro reveal" id="collection">
   <div class="pill-tag">
-    <span class="t-en">SS 2025 — Riviera</span>
-    <span class="t-sq">PV 2025 — Riviera</span>
+    <span class="t-en">SS 2026 — Riviera</span>
+    <span class="t-sq">PV 2026 — Riviera</span>
   </div>
   <h2 class="col-title">
     <span class="t-en">The <em>Riviera</em><br>Collection</span>
@@ -824,7 +833,7 @@
            alt="Céleste Silk Top — bold geometric spiral print halter top" draggable="false">
       <div class="piece-veil"></div>
       <div class="piece-badge">
-        <span class="t-en">The Céleste Edit</span>
+        <span class="t-en">The Céleste</span>
         <span class="t-sq">Seria Céleste</span>
       </div>
       <div class="piece-body">
@@ -920,15 +929,16 @@
     sq = !sq;
     document.body.classList.toggle('sq', sq);
     document.documentElement.lang = sq ? 'sq' : 'en';
-    langBtn.textContent = sq ? 'EN' : 'SQ';
+    langBtn.textContent = sq ? 'EN' : 'AL';
   });
 
-  // ── Lookbook: Dots ───────────────────────────────────
-  const lb   = document.getElementById('lookbook');
-  const dots = document.querySelectorAll('.dot');
+  // ── Lookbook: Active piece + animation ───────────────
+  const lb     = document.getElementById('lookbook');
+  const dots   = document.querySelectorAll('.dot');
+  const pieces = document.querySelectorAll('.piece');
 
-  function updateDots() {
-    const idx = Math.round(lb.scrollLeft / lb.offsetWidth);
+  function setActive(idx) {
+    pieces.forEach((p, i) => p.classList.toggle('active', i === idx));
     dots.forEach((d, i) => {
       const on = i === idx;
       d.classList.toggle('on', on);
@@ -936,30 +946,18 @@
     });
   }
 
-  lb.addEventListener('scroll', updateDots, { passive: true });
+  // Activate first piece immediately
+  setActive(0);
+
+  lb.addEventListener('scroll', () => {
+    const idx = Math.round(lb.scrollLeft / lb.offsetWidth);
+    setActive(idx);
+  }, { passive: true });
 
   dots.forEach(dot => {
     dot.addEventListener('click', () => {
       lb.scrollTo({ left: parseInt(dot.dataset.i) * lb.offsetWidth, behavior: 'smooth' });
     });
-  });
-
-  // ── Lookbook: Drag-to-scroll (desktop) ──────────────
-  let isDown = false, startX, scrollLeftStart;
-  lb.addEventListener('mousedown', e => {
-    isDown = true;
-    lb.style.cursor = 'grabbing';
-    startX = e.pageX - lb.offsetLeft;
-    scrollLeftStart = lb.scrollLeft;
-  });
-  lb.addEventListener('mouseleave', () => { isDown = false; lb.style.cursor = 'grab'; });
-  lb.addEventListener('mouseup',    () => { isDown = false; lb.style.cursor = 'grab'; });
-  lb.addEventListener('mousemove',  e => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x    = e.pageX - lb.offsetLeft;
-    const walk = (x - startX) * 1.4;
-    lb.scrollLeft = scrollLeftStart - walk;
   });
 
   // ── Scroll Reveal ────────────────────────────────────
