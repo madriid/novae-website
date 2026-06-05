@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="NOVAë — Luxury women's clothing from Tirana, Albania. The Riviera Collection.">
   <title>NOVAë</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* ── RESET & TOKENS ──────────────────────────────── */
+    /* ── RESET ────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -19,18 +19,16 @@
       --burg-2:     #8C1728;
       --ink:        #1A1109;
       --muted:      #8B7B6F;
-      --border:     rgba(107, 15, 26, 0.14);
+      --border:     rgba(107,15,26,0.13);
       --display:    'Cormorant Garamond', serif;
       --body:       'Jost', sans-serif;
-      --ease:       cubic-bezier(.4,0,.2,1);
+      --spring:     cubic-bezier(.25,.46,.45,.94);
     }
 
     html {
-      scroll-behavior: smooth;
       -webkit-tap-highlight-color: transparent;
       text-size-adjust: 100%;
-      overflow-x: hidden;
-      overscroll-behavior: none;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
@@ -39,8 +37,6 @@
       font-family: var(--body);
       font-weight: 300;
       overflow-x: hidden;
-      max-width: 100%;
-      touch-action: pan-y;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -56,20 +52,30 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 200;
-      height: 58px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
-      background: rgba(240, 235, 227, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      padding: 0 24px;
+      background: rgba(240,235,227,0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .nav-logo {
       font-family: var(--display);
-      font-size: 1.45rem;
+      font-size: 1.5rem;
       font-weight: 400;
       letter-spacing: 0.1em;
       color: var(--burg);
@@ -77,18 +83,10 @@
       line-height: 1;
     }
 
-    .nav-logo .star {
-      display: inline-block;
-      font-size: 0.5em;
-      vertical-align: super;
-      margin: 0 1px;
-      color: var(--burg);
-    }
-
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
 
     .lang-btn {
@@ -99,11 +97,11 @@
       text-transform: uppercase;
       color: var(--muted);
       background: none;
-      border: 1px solid rgba(139, 123, 111, 0.4);
+      border: 1px solid rgba(139,123,111,0.4);
       border-radius: 2px;
-      padding: 4px 9px;
+      padding: 5px 10px;
       cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
+      transition: color .2s, border-color .2s;
       line-height: 1.5;
     }
     .lang-btn:hover { color: var(--burg); border-color: var(--burg); }
@@ -112,9 +110,9 @@
       display: flex;
       align-items: center;
       color: var(--ink);
-      opacity: 0.65;
+      opacity: 0.6;
       text-decoration: none;
-      transition: opacity 0.2s;
+      transition: opacity .2s;
     }
     .nav-ig:hover { opacity: 1; }
 
@@ -126,140 +124,137 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 100px 28px 80px;
+      padding: 100px 32px 80px;
       position: relative;
       overflow: hidden;
     }
 
     .hero::before {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
         radial-gradient(ellipse 60% 50% at 15% 85%, rgba(107,15,26,.07) 0%, transparent 70%),
         radial-gradient(ellipse 50% 40% at 85% 15%, rgba(107,15,26,.05) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    /* subtle grain texture */
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      background-size: 256px;
-      opacity: 0.5;
-      pointer-events: none;
-    }
-
     .hero-eyebrow {
       font-size: 0.58rem;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 26px;
+      margin-bottom: 28px;
       font-weight: 400;
+      will-change: opacity, transform;
       opacity: 0;
-      animation: fadeUp .9s .2s var(--ease) forwards;
+      animation: fadeUp 1s .2s var(--spring) forwards;
     }
 
     .hero-wordmark {
       font-family: var(--display);
-      font-size: clamp(3.8rem, 18vw, 7rem);
+      font-size: clamp(4rem, 18vw, 9rem);
       font-weight: 300;
       color: var(--burg);
       letter-spacing: 0.08em;
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      will-change: opacity, transform;
       opacity: 0;
-      animation: fadeUp .9s .4s var(--ease) forwards;
+      animation: fadeUp 1s .4s var(--spring) forwards;
     }
 
     .hero-divider {
-      width: 36px;
+      width: 40px;
       height: 1px;
       background: var(--burg);
-      opacity: 0.35;
-      margin: 18px auto 18px;
+      margin: 20px auto;
       opacity: 0;
-      animation: fadeIn .9s .6s ease forwards;
+      animation: fadeIn 1s .6s ease forwards;
     }
 
     .hero-tagline {
       font-family: var(--display);
-      font-size: clamp(1rem, 4.5vw, 1.35rem);
+      font-size: clamp(1.05rem, 4vw, 1.5rem);
       font-weight: 300;
       font-style: italic;
       color: var(--muted);
-      margin-bottom: 44px;
-      line-height: 1.55;
+      margin-bottom: 48px;
+      line-height: 1.6;
+      will-change: opacity, transform;
       opacity: 0;
-      animation: fadeUp .9s .7s var(--ease) forwards;
+      animation: fadeUp 1s .7s var(--spring) forwards;
     }
 
     .hero-cta {
       display: inline-block;
-      padding: 14px 38px;
+      padding: 15px 40px;
       background: var(--burg);
       color: var(--cream);
       text-decoration: none;
       font-family: var(--body);
-      font-size: 0.58rem;
+      font-size: 0.6rem;
       font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      transition: background .25s, transform .25s;
+      transition: background .3s, transform .3s var(--spring);
+      will-change: opacity, transform;
       opacity: 0;
-      animation: fadeUp .9s .9s var(--ease) forwards;
+      animation: fadeUp 1s .9s var(--spring) forwards;
     }
-    .hero-cta:hover { background: var(--burg-2); transform: translateY(-2px); }
+    .hero-cta:hover  { background: var(--burg-2); transform: translateY(-2px); }
     .hero-cta:active { transform: translateY(0); }
 
     .scroll-indicator {
       position: absolute;
-      bottom: 28px;
-      left: 50%;
+      bottom: 30px; left: 50%;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
       opacity: 0;
-      animation: fadeIn 1s 1.6s ease forwards;
+      animation: fadeIn 1s 1.8s ease forwards;
     }
-
     .scroll-indicator span {
       font-size: 0.52rem;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--muted);
     }
-
     .scroll-line {
-      width: 1px;
-      height: 36px;
+      width: 1px; height: 36px;
       background: linear-gradient(to bottom, var(--muted), transparent);
-      animation: drip 2.2s 2s infinite;
+      animation: drip 2.4s 2.2s infinite;
     }
 
     @keyframes drip {
-      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
-      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
-      51%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
-      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+      0%   { transform: scaleY(0); transform-origin: top;    }
+      50%  { transform: scaleY(1); transform-origin: top;    }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
     }
-
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0);    }
     }
     @keyframes fadeIn {
       from { opacity: 0; } to { opacity: 1; }
     }
 
+    /* ── PAGE WRAPPER (desktop centering) ─────────────── */
+    .page-section {
+      width: 100%;
+    }
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
     /* ── COLLECTION INTRO ────────────────────────────── */
     .col-intro {
-      padding: 62px 28px 36px;
+      padding: 70px 0 40px;
       text-align: center;
       border-top: 1px solid var(--border);
     }
@@ -267,32 +262,32 @@
     .pill-tag {
       display: inline-block;
       font-size: 0.52rem;
-      letter-spacing: 0.26em;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--burg);
       border: 1px solid var(--burg);
-      padding: 5px 14px;
-      margin-bottom: 20px;
+      padding: 6px 16px;
+      margin-bottom: 22px;
       font-weight: 400;
     }
 
     .col-title {
       font-family: var(--display);
-      font-size: clamp(2.2rem, 9vw, 3.2rem);
+      font-size: clamp(2.4rem, 8vw, 4.5rem);
       font-weight: 300;
-      line-height: 1.12;
+      line-height: 1.1;
       color: var(--ink);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .col-title em { font-style: italic; color: var(--burg); }
 
     .col-desc {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       font-weight: 300;
       color: var(--muted);
-      line-height: 1.9;
-      max-width: 300px;
-      margin: 0 auto 28px;
+      line-height: 2;
+      max-width: 340px;
+      margin: 0 auto 32px;
     }
 
     .swipe-cue {
@@ -300,40 +295,43 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      opacity: 0.55;
+      opacity: 0.5;
     }
     .swipe-cue span {
       font-size: 0.54rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
-    /* ── LOOKBOOK ────────────────────────────────────── */
-    .lookbook-wrap { position: relative; }
-
-    .lookbook {
-      display: flex;
-      overflow-x: scroll;
-      scroll-snap-type: x proximity;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
+    /* ── CAROUSEL ────────────────────────────────────── */
+    .carousel-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;        /* clips the sliding track */
+      user-select: none;
+      -webkit-user-select: none;
       cursor: grab;
-      overscroll-behavior-x: contain;
-      touch-action: pan-x;
+      touch-action: pan-y;    /* let vertical scroll pass through */
     }
-    .lookbook:active { cursor: grabbing; }
-    .lookbook::-webkit-scrollbar { display: none; }
+    .carousel-wrap.dragging { cursor: grabbing; }
+
+    /* The sliding track — moved via JS transform */
+    .carousel-track {
+      display: flex;
+      will-change: transform;
+    }
 
     .piece {
-      min-width: 100vw;
-      width: 100vw;
+      min-width: 100%;
+      width: 100%;
       height: 88svh;
-      scroll-snap-align: start;
       position: relative;
       overflow: hidden;
       flex-shrink: 0;
+      pointer-events: none; /* re-enabled per child */
     }
+    .piece a, .piece button { pointer-events: auto; }
 
     .piece-img {
       width: 100%;
@@ -343,68 +341,66 @@
       display: block;
       user-select: none;
       -webkit-user-drag: none;
+      pointer-events: none;
     }
 
     .piece-veil {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: linear-gradient(
         to bottom,
-        transparent 35%,
-        rgba(20, 12, 6, .04) 55%,
-        rgba(20, 12, 6, .72) 100%
+        transparent 30%,
+        rgba(16,9,4,.03) 55%,
+        rgba(16,9,4,.78) 100%
       );
     }
 
     .piece-badge {
       position: absolute;
-      top: 18px;
-      left: 18px;
+      top: 20px; left: 20px;
       font-size: 0.48rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: rgba(250,247,243,.88);
-      border: 1px solid rgba(250,247,243,.35);
-      padding: 4px 11px;
-      background: rgba(20,12,6,.18);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(250,247,243,.32);
+      padding: 5px 12px;
+      background: rgba(16,9,4,.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
+    /* Content slides up when piece becomes active */
     .piece-body {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 22px 22px 30px;
-      transform: translateY(14px);
+      padding: 24px 28px 36px;
+      transform: translateY(18px);
       opacity: 0;
-      transition: transform 0.55s cubic-bezier(.25,.46,.45,.94),
-                  opacity   0.55s cubic-bezier(.25,.46,.45,.94);
+      transition:
+        transform .6s var(--spring),
+        opacity   .5s ease;
     }
-
     .piece.active .piece-body {
       transform: translateY(0);
       opacity: 1;
     }
 
-    .piece-num { display: none; }
-
     .piece-name {
       font-family: var(--display);
-      font-size: clamp(1.7rem, 7.5vw, 2.4rem);
+      font-size: clamp(1.8rem, 7vw, 3rem);
       font-weight: 300;
       color: var(--warm-white);
       line-height: 1.08;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .piece-name em { font-style: italic; }
 
     .piece-desc {
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       font-weight: 300;
       color: rgba(250,247,243,.68);
-      line-height: 1.75;
-      margin-bottom: 20px;
-      max-width: 270px;
+      line-height: 1.8;
+      margin-bottom: 22px;
+      max-width: 300px;
     }
 
     .piece-actions {
@@ -419,7 +415,7 @@
       align-items: center;
       justify-content: center;
       gap: 9px;
-      padding: 13px 16px;
+      padding: 13px 18px;
       background: var(--warm-white);
       color: var(--ink);
       text-decoration: none;
@@ -430,81 +426,103 @@
       transition: background .2s, transform .15s;
       -webkit-tap-highlight-color: transparent;
     }
-    .btn-wa:hover { background: #fff; }
+    .btn-wa:hover  { background: #fff; }
     .btn-wa:active { transform: scale(.98); }
 
     .btn-ig {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 46px;
+      width: 48px;
       flex-shrink: 0;
-      border: 1px solid rgba(250,247,243,.35);
+      border: 1px solid rgba(250,247,243,.32);
       color: var(--warm-white);
       text-decoration: none;
       transition: background .2s;
       -webkit-tap-highlight-color: transparent;
     }
-    .btn-ig:hover { background: rgba(250,247,243,.12); }
-    .btn-ig:active { background: rgba(250,247,243,.2); }
+    .btn-ig:hover  { background: rgba(250,247,243,.12); }
+    .btn-ig:active { background: rgba(250,247,243,.2);  }
+
+    /* ── DESKTOP CAROUSEL ARROWS ─────────────────────── */
+    .carousel-arrow {
+      display: none; /* hidden on mobile */
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(250,247,243,.38);
+      background: rgba(16,9,4,.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--warm-white);
+      cursor: pointer;
+      transition: background .25s, transform .25s var(--spring);
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-arrow:hover { background: rgba(16,9,4,.45); transform: translateY(-50%) scale(1.06); }
+    .carousel-arrow:active { transform: translateY(-50%) scale(.97); }
+    .arrow-prev { left: 24px;  }
+    .arrow-next { right: 24px; }
+    .carousel-arrow.hidden { opacity: 0; pointer-events: none; }
 
     /* ── PROGRESS DOTS ───────────────────────────────── */
     .dots {
       display: flex;
       justify-content: center;
-      gap: 7px;
-      padding: 14px 0 6px;
+      gap: 8px;
+      padding: 16px 0 8px;
     }
-
     .dot {
-      width: 16px;
-      height: 2px;
+      width: 16px; height: 2px;
       background: rgba(107,15,26,.2);
       cursor: pointer;
-      transition: width .3s var(--ease), background .3s;
-      border: none;
-      outline: none;
+      transition: width .35s var(--spring), background .35s;
+      border: none; outline: none;
     }
-    .dot.on { width: 32px; background: var(--burg); }
+    .dot.on { width: 34px; background: var(--burg); }
 
-    /* ── SECTION: BRAND STORY ────────────────────────── */
+    /* ── STORY SECTION ───────────────────────────────── */
     .story {
-      padding: 70px 28px 60px;
+      padding: 80px 0 70px;
       text-align: center;
       border-top: 1px solid var(--border);
     }
 
     .section-eyebrow {
       font-size: 0.52rem;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .story-quote {
       font-family: var(--display);
-      font-size: clamp(1.45rem, 6.5vw, 2.1rem);
+      font-size: clamp(1.5rem, 5vw, 2.6rem);
       font-weight: 300;
       font-style: italic;
       color: var(--ink);
-      line-height: 1.5;
-      margin-bottom: 24px;
+      line-height: 1.45;
+      margin-bottom: 26px;
     }
     .story-quote em { color: var(--burg); }
 
     .story-body {
-      font-size: 0.77rem;
+      font-size: 0.78rem;
       font-weight: 300;
       color: var(--muted);
-      line-height: 2;
-      max-width: 310px;
+      line-height: 2.1;
+      max-width: 440px;
       margin: 0 auto;
     }
 
-    /* ── SECTION: INSTAGRAM ──────────────────────────── */
+    /* ── INSTAGRAM ───────────────────────────────────── */
     .ig-section {
-      padding: 52px 28px 56px;
+      padding: 60px 0 65px;
       text-align: center;
       border-top: 1px solid var(--border);
       background: var(--warm-white);
@@ -514,7 +532,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 14px 30px;
+      padding: 15px 32px;
       border: 1px solid var(--ink);
       color: var(--ink);
       text-decoration: none;
@@ -522,41 +540,38 @@
       font-weight: 400;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      transition: background .25s, color .25s;
-      margin-top: 20px;
+      transition: background .28s, color .28s;
+      margin-top: 22px;
     }
     .ig-follow-btn:hover { background: var(--ink); color: var(--cream); }
-    .ig-follow-btn:active { opacity: .9; }
 
     /* ── FOOTER ──────────────────────────────────────── */
     footer {
-      padding: 44px 28px 36px;
+      padding: 52px 0 40px;
       text-align: center;
       border-top: 1px solid var(--border);
     }
 
     .footer-wordmark {
       font-family: var(--display);
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 300;
       color: var(--burg);
       letter-spacing: 0.12em;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
-
     .footer-tag {
       font-family: var(--display);
       font-style: italic;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--muted);
-      margin-bottom: 26px;
+      margin-bottom: 28px;
     }
-
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 28px;
-      margin-bottom: 26px;
+      gap: 32px;
+      margin-bottom: 28px;
     }
     .footer-links a {
       font-size: 0.58rem;
@@ -567,66 +582,70 @@
       transition: color .2s;
     }
     .footer-links a:hover { color: var(--burg); }
-
     .footer-copy {
       font-size: 0.58rem;
       color: var(--muted);
       opacity: 0.5;
-      letter-spacing: 0.06em;
     }
 
     /* ── FLOATING WHATSAPP ───────────────────────────── */
     .float-wa {
       position: fixed;
-      bottom: 22px;
-      right: 18px;
+      bottom: 24px; right: 20px;
       z-index: 300;
-      width: 54px;
-      height: 54px;
+      width: 56px; height: 56px;
       border-radius: 50%;
       background: #25D366;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 18px rgba(37,211,102,.38), 0 2px 8px rgba(0,0,0,.12);
+      box-shadow: 0 4px 20px rgba(37,211,102,.36), 0 2px 8px rgba(0,0,0,.12);
       text-decoration: none;
-      transition: transform .25s var(--ease), box-shadow .25s;
-      animation: floatPulse 3s 2.5s ease-in-out infinite;
+      transition: transform .28s var(--spring), box-shadow .28s;
+      animation: floatPulse 3.5s 2.5s ease-in-out infinite;
     }
-    .float-wa:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 24px rgba(37,211,102,.5), 0 2px 10px rgba(0,0,0,.15);
-    }
-    .float-wa:active { transform: scale(.96); }
+    .float-wa:hover  { transform: scale(1.09); box-shadow: 0 6px 26px rgba(37,211,102,.5); }
+    .float-wa:active { transform: scale(.95); }
 
     @keyframes floatPulse {
-      0%, 100% { transform: translateY(0); }
+      0%, 100% { transform: translateY(0);  }
       50%       { transform: translateY(-5px); }
     }
 
-    /* ── REVEAL ANIMATIONS ───────────────────────────── */
+    /* ── SCROLL REVEAL ───────────────────────────────── */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .9s var(--ease), transform .9s var(--ease);
+      transform: translateY(32px);
+      transition:
+        opacity .9s var(--spring),
+        transform .9s var(--spring);
     }
-    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal.in      { opacity: 1; transform: translateY(0); }
     .reveal.delay-1 { transition-delay: .15s; }
-    .reveal.delay-2 { transition-delay: .3s; }
+    .reveal.delay-2 { transition-delay: .3s;  }
 
-    /* ── DESKTOP TOUCH-UP ────────────────────────────── */
-    @media (min-width: 640px) {
-      .piece { height: 92svh; }
-      .piece-name { font-size: 2.6rem; }
-      .col-title { font-size: 3.4rem; }
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (min-width: 768px) {
+      .piece { height: 90svh; }
+      nav { padding: 0 40px; }
     }
 
     @media (min-width: 1024px) {
-      .piece { max-width: 480px; }
-      .lookbook { justify-content: flex-start; }
-      nav { max-width: 480px; left: 50%; transform: translateX(-50%); right: auto; width: 100%; }
-      body { display: flex; flex-direction: column; align-items: center; }
-      section, .col-intro, .lookbook-wrap, footer { width: 100%; max-width: 480px; }
+      /* Show carousel arrows on desktop */
+      .carousel-arrow { display: flex; }
+      /* Swipe cue less relevant on desktop */
+      .swipe-cue { display: none; }
+      /* Bigger piece content area */
+      .piece-body { padding: 32px 60px 50px; max-width: 700px; }
+      .piece-desc { max-width: 420px; font-size: 0.76rem; }
+      /* Larger hero */
+      .hero { padding: 120px 60px 100px; }
+      /* Footer more spacious */
+      footer { padding: 70px 0 52px; }
+    }
+
+    @media (min-width: 1400px) {
+      .piece-body { padding: 36px 80px 60px; }
     }
   </style>
 </head>
@@ -634,16 +653,18 @@
 
 <!-- ═══ NAV ════════════════════════════════════════════ -->
 <nav>
-  <a class="nav-logo" href="#">NOVAë</a>
-  <div class="nav-right">
-    <button class="lang-btn" id="langBtn" aria-label="Switch language">AL</button>
-    <a class="nav-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5.5"/>
-        <circle cx="12" cy="12" r="4.2"/>
-        <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>
-      </svg>
-    </a>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">NOVAë</a>
+    <div class="nav-right">
+      <button class="lang-btn" id="langBtn" aria-label="Switch language">AL</button>
+      <a class="nav-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <rect x="2" y="2" width="20" height="20" rx="5.5"/>
+          <circle cx="12" cy="12" r="4.2"/>
+          <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+    </div>
   </div>
 </nav>
 
@@ -665,68 +686,76 @@
   </a>
   <div class="scroll-indicator" aria-hidden="true">
     <div class="scroll-line"></div>
-    <span>
-      <span class="t-en">Scroll</span>
-      <span class="t-sq">Rrëshqit</span>
-    </span>
+    <span><span class="t-en">Scroll</span><span class="t-sq">Rrëshqit</span></span>
   </div>
 </section>
 
 <!-- ═══ COLLECTION INTRO ════════════════════════════════ -->
-<section class="col-intro reveal" id="collection">
-  <div class="pill-tag">
-    <span class="t-en">SS 2026 — Riviera</span>
-    <span class="t-sq">PV 2026 — Riviera</span>
+<div class="page-section col-intro reveal" id="collection">
+  <div class="section-inner">
+    <div class="pill-tag">
+      <span class="t-en">SS 2026 — Riviera</span>
+      <span class="t-sq">PV 2026 — Riviera</span>
+    </div>
+    <h2 class="col-title">
+      <span class="t-en">The <em>Riviera</em><br>Collection</span>
+      <span class="t-sq">Koleksioni<br><em>Riviera</em></span>
+    </h2>
+    <p class="col-desc">
+      <span class="t-en">Five pieces. Mediterranean light.<br>Women who dress only for themselves.</span>
+      <span class="t-sq">Pesë veshje. Dritë mesdhetare.<br>Gra që vishen vetëm për veten.</span>
+    </p>
+    <div class="swipe-cue" aria-hidden="true">
+      <svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 5h20M15 1l6 4-6 4"/>
+      </svg>
+      <span>
+        <span class="t-en">Swipe to explore</span>
+        <span class="t-sq">Rrëshqit për të zbuluar</span>
+      </span>
+    </div>
   </div>
-  <h2 class="col-title">
-    <span class="t-en">The <em>Riviera</em><br>Collection</span>
-    <span class="t-sq">Koleksioni<br><em>Riviera</em></span>
-  </h2>
-  <p class="col-desc">
-    <span class="t-en">Five pieces. Mediterranean light.<br>Women who dress only for themselves.</span>
-    <span class="t-sq">Pesë veshje. Dritë mesdhetare.<br>Gra që vishen vetëm për veten.</span>
-  </p>
-  <div class="swipe-cue" aria-hidden="true">
-    <svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M1 5h20M15 1l6 4-6 4"/>
-    </svg>
-    <span>
-      <span class="t-en">Swipe to explore</span>
-      <span class="t-sq">Rrëshqit për të zbuluar</span>
-    </span>
-  </div>
-</section>
+</div>
 
-<!-- ═══ LOOKBOOK ════════════════════════════════════════ -->
-<div class="lookbook-wrap">
-  <div class="lookbook" id="lookbook" role="region" aria-label="Product lookbook">
+<!-- ═══ CAROUSEL ════════════════════════════════════════ -->
+<div class="carousel-wrap" id="carouselWrap" role="region" aria-label="Product lookbook">
+
+  <!-- Desktop arrow buttons -->
+  <button class="carousel-arrow arrow-prev" id="arrowPrev" aria-label="Previous piece">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 18l-6-6 6-6"/>
+    </svg>
+  </button>
+  <button class="carousel-arrow arrow-next" id="arrowNext" aria-label="Next piece">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18l6-6-6-6"/>
+    </svg>
+  </button>
+
+  <!-- Sliding track -->
+  <div class="carousel-track" id="carouselTrack">
 
     <!-- ─ 01 Minuit Charm Dress ─ -->
-    <article class="piece" aria-label="Minuit Charm Dress">
-      <img class="piece-img" src="images/MinuitCharmDress.png"
-           alt="Minuit Charm Dress — black halter mini dress" draggable="false">
+    <article class="piece active" aria-label="Minuit Charm Dress">
+      <img class="piece-img" src="images/MinuitCharmDress.png" alt="Minuit Charm Dress" draggable="false">
       <div class="piece-veil"></div>
       <div class="piece-badge">
         <span class="t-en">Riviera Collection</span>
         <span class="t-sq">Koleksioni Riviera</span>
       </div>
       <div class="piece-body">
-        <p class="piece-num">01 / 05</p>
         <h3 class="piece-name">Minuit <em>Charm</em><br>Dress</h3>
         <p class="piece-desc">
           <span class="t-en">Sleek halter silhouette in fluid black. For the woman who arrives and the room notices.</span>
           <span class="t-sq">Siluetë halter në të zezë fluide. Për gruan e cila hyn dhe dhoma vëren.</span>
         </p>
         <div class="piece-actions">
-          <a class="btn-wa"
-             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Minuit%20Charm%20Dress."
-             target="_blank" rel="noopener" aria-label="Order Minuit Charm Dress on WhatsApp">
+          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Minuit%20Charm%20Dress." target="_blank" rel="noopener">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span class="t-en">Order via WhatsApp</span>
-            <span class="t-sq">Porosit në WhatsApp</span>
+            <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
           </a>
-          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
         </div>
       </div>
@@ -734,30 +763,25 @@
 
     <!-- ─ 02 Belladonna Red Velvet ─ -->
     <article class="piece" aria-label="Belladonna Dress in Red Velvet">
-      <img class="piece-img" src="images/Belladonna_Dress_in_Red_Velvet.png"
-           alt="Belladonna Dress in Red Velvet — structured corset midi dress" draggable="false">
+      <img class="piece-img" src="images/Belladonna_Dress_in_Red_Velvet.png" alt="Belladonna Dress in Red Velvet" draggable="false">
       <div class="piece-veil"></div>
       <div class="piece-badge">
         <span class="t-en">Riviera Collection</span>
         <span class="t-sq">Koleksioni Riviera</span>
       </div>
       <div class="piece-body">
-        <p class="piece-num">02 / 05</p>
         <h3 class="piece-name">Belladonna<br><em>in Red Velvet</em></h3>
         <p class="piece-desc">
-          <span class="t-en">Structured corset bodice, sweeping midi skirt. A dress that commands every room it enters.</span>
-          <span class="t-sq">Korse e strukturuar, fund i gjerë midi. Një fustan që zotëron çdo sallë ku hyn.</span>
+          <span class="t-en">Structured corset bodice, sweeping midi skirt. A dress that commands every room.</span>
+          <span class="t-sq">Korse e strukturuar, fund i gjerë midi. Një fustan që zotëron çdo sallë.</span>
         </p>
         <div class="piece-actions">
-          <a class="btn-wa"
-             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Belladonna%20Dress%20in%20Red%20Velvet."
-             target="_blank" rel="noopener" aria-label="Order Belladonna Red Velvet on WhatsApp">
+          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Belladonna%20Dress%20in%20Red%20Velvet." target="_blank" rel="noopener">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span class="t-en">Order via WhatsApp</span>
-            <span class="t-sq">Porosit në WhatsApp</span>
+            <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
           </a>
-          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
         </div>
       </div>
@@ -765,30 +789,25 @@
 
     <!-- ─ 03 Belladonna Brownie ─ -->
     <article class="piece" aria-label="Belladonna Dress in Brownie">
-      <img class="piece-img" src="images/Belladonna_Dress_in_Brownie.png"
-           alt="Belladonna Dress in Brownie — warm cocoa corset midi dress" draggable="false">
+      <img class="piece-img" src="images/Belladonna_Dress_in_Brownie.png" alt="Belladonna Dress in Brownie" draggable="false">
       <div class="piece-veil"></div>
       <div class="piece-badge">
         <span class="t-en">Riviera Collection</span>
         <span class="t-sq">Koleksioni Riviera</span>
       </div>
       <div class="piece-body">
-        <p class="piece-num">03 / 05</p>
         <h3 class="piece-name">Belladonna<br><em>in Brownie</em></h3>
         <p class="piece-desc">
           <span class="t-en">The same architectural corset in warm earthy cocoa. Timeless femininity, rewritten.</span>
-          <span class="t-sq">E njëjta korse arkitekturore në kakao të ngrohtë. Femërorësi e përjetshme, e rishkruar.</span>
+          <span class="t-sq">E njëjta korse në kakao të ngrohtë. Femërorësi e përjetshme, e rishkruar.</span>
         </p>
         <div class="piece-actions">
-          <a class="btn-wa"
-             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Belladonna%20Dress%20in%20Brownie."
-             target="_blank" rel="noopener" aria-label="Order Belladonna Brownie on WhatsApp">
+          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Belladonna%20Dress%20in%20Brownie." target="_blank" rel="noopener">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span class="t-en">Order via WhatsApp</span>
-            <span class="t-sq">Porosit në WhatsApp</span>
+            <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
           </a>
-          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
         </div>
       </div>
@@ -796,31 +815,25 @@
 
     <!-- ─ 04 Terra Linen Set ─ -->
     <article class="piece" aria-label="Terra Linen Set">
-      <img class="piece-img" src="images/Terra_Linen_Set.png"
-           style="object-position: center center;"
-           alt="Terra Linen Set — natural linen corset top and wide-leg trousers" draggable="false">
+      <img class="piece-img" src="images/Terra_Linen_Set.png" style="object-position: center center;" alt="Terra Linen Set" draggable="false">
       <div class="piece-veil"></div>
       <div class="piece-badge">
         <span class="t-en">Riviera Collection</span>
         <span class="t-sq">Koleksioni Riviera</span>
       </div>
       <div class="piece-body">
-        <p class="piece-num">04 / 05</p>
         <h3 class="piece-name">Terra<br><em>Linen Set</em></h3>
         <p class="piece-desc">
           <span class="t-en">Effortless structure. Corset top and wide-leg trousers in natural linen. Day to night.</span>
           <span class="t-sq">Strukturë natyrale. Top korse dhe pantallona gjerë në liri natyral. Ditë dhe natë.</span>
         </p>
         <div class="piece-actions">
-          <a class="btn-wa"
-             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Terra%20Linen%20Set."
-             target="_blank" rel="noopener" aria-label="Order Terra Linen Set on WhatsApp">
+          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Terra%20Linen%20Set." target="_blank" rel="noopener">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span class="t-en">Order via WhatsApp</span>
-            <span class="t-sq">Porosit në WhatsApp</span>
+            <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
           </a>
-          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
         </div>
       </div>
@@ -828,149 +841,309 @@
 
     <!-- ─ 05 Céleste Silk Top ─ -->
     <article class="piece" aria-label="Céleste Silk Top">
-      <img class="piece-img" src="images/Ce_leste_Silk_Top.png"
-           style="object-position: center top;"
-           alt="Céleste Silk Top — bold geometric spiral print halter top" draggable="false">
+      <img class="piece-img" src="images/Ce_leste_Silk_Top.png" style="object-position: center top;" alt="Céleste Silk Top" draggable="false">
       <div class="piece-veil"></div>
       <div class="piece-badge">
-        <span class="t-en">The Céleste</span>
+        <span class="t-en">The Céleste Edit</span>
         <span class="t-sq">Seria Céleste</span>
       </div>
       <div class="piece-body">
-        <p class="piece-num">05 / 05</p>
         <h3 class="piece-name">Céleste<br><em>Silk Top</em></h3>
         <p class="piece-desc">
           <span class="t-en">A burst of colour. Silk halter printed in bold geometric spirals. Summer, unfiltered.</span>
           <span class="t-sq">Një shpërthim ngjyrash. Halter mëndafshi me spirale gjeometrike. Vera, e pafiltruar.</span>
         </p>
         <div class="piece-actions">
-          <a class="btn-wa"
-             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20C%C3%A9leste%20Silk%20Top."
-             target="_blank" rel="noopener" aria-label="Order Céleste Silk Top on WhatsApp">
+          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20C%C3%A9leste%20Silk%20Top." target="_blank" rel="noopener">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span class="t-en">Order via WhatsApp</span>
-            <span class="t-sq">Porosit në WhatsApp</span>
+            <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
           </a>
-          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
         </div>
       </div>
     </article>
 
-  </div><!-- /lookbook -->
+  </div><!-- /carousel-track -->
 
   <div class="dots" id="dots" role="tablist" aria-label="Collection navigation">
-    <button class="dot on" role="tab" aria-selected="true"  aria-label="Piece 1" data-i="0"></button>
-    <button class="dot"    role="tab" aria-selected="false" aria-label="Piece 2" data-i="1"></button>
-    <button class="dot"    role="tab" aria-selected="false" aria-label="Piece 3" data-i="2"></button>
-    <button class="dot"    role="tab" aria-selected="false" aria-label="Piece 4" data-i="3"></button>
-    <button class="dot"    role="tab" aria-selected="false" aria-label="Piece 5" data-i="4"></button>
+    <button class="dot on" role="tab" aria-selected="true"  data-i="0" aria-label="Piece 1"></button>
+    <button class="dot"    role="tab" aria-selected="false" data-i="1" aria-label="Piece 2"></button>
+    <button class="dot"    role="tab" aria-selected="false" data-i="2" aria-label="Piece 3"></button>
+    <button class="dot"    role="tab" aria-selected="false" data-i="3" aria-label="Piece 4"></button>
+    <button class="dot"    role="tab" aria-selected="false" data-i="4" aria-label="Piece 5"></button>
   </div>
-</div><!-- /lookbook-wrap -->
+
+</div><!-- /carousel-wrap -->
 
 <!-- ═══ STORY ════════════════════════════════════════════ -->
-<section class="story reveal">
-  <p class="section-eyebrow">
-    <span class="t-en">Our Story</span>
-    <span class="t-sq">Historia Jonë</span>
-  </p>
-  <blockquote class="story-quote">
-    <span class="t-en">"<em>NOVAë</em> is not a brand.<br>It is a feeling."</span>
-    <span class="t-sq">"<em>NOVAë</em> nuk është një markë.<br>Është një ndjenjë."</span>
-  </blockquote>
-  <p class="story-body">
-    <span class="t-en">Born in Tirana. Shaped by Mediterranean light and European sensibility. Each piece is made for the woman who moves through the world with quiet confidence — and dresses only for herself.</span>
-    <span class="t-sq">E lindur në Tiranë. E formuar nga drita mesdhetare dhe ndjeshmëria evropiane. Çdo veshje është bërë për gruan që lëviz në botë me besim të qetë — dhe vishet vetëm për veten e saj.</span>
-  </p>
-</section>
+<div class="page-section story reveal">
+  <div class="section-inner">
+    <p class="section-eyebrow">
+      <span class="t-en">Our Story</span>
+      <span class="t-sq">Historia Jonë</span>
+    </p>
+    <blockquote class="story-quote">
+      <span class="t-en">"<em>NOVAë</em> is not a brand.<br>It is a feeling."</span>
+      <span class="t-sq">"<em>NOVAë</em> nuk është një markë.<br>Është një ndjenjë."</span>
+    </blockquote>
+    <p class="story-body">
+      <span class="t-en">Born in Tirana. Shaped by Mediterranean light and European sensibility. Each piece is made for the woman who moves through the world with quiet confidence — and dresses only for herself.</span>
+      <span class="t-sq">E lindur në Tiranë. E formuar nga drita mesdhetare dhe ndjeshmëria evropiane. Çdo veshje është bërë për gruan që lëviz në botë me besim të qetë — dhe vishet vetëm për veten e saj.</span>
+    </p>
+  </div>
+</div>
 
 <!-- ═══ INSTAGRAM ════════════════════════════════════════ -->
-<section class="ig-section reveal delay-1">
-  <p class="section-eyebrow">
-    <span class="t-en">Follow The Story</span>
-    <span class="t-sq">Ndiq Historinë</span>
-  </p>
-  <a class="ig-follow-btn" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
-    @novae_thebrand
-  </a>
-</section>
+<div class="page-section ig-section reveal delay-1">
+  <div class="section-inner">
+    <p class="section-eyebrow">
+      <span class="t-en">Follow The Story</span>
+      <span class="t-sq">Ndiq Historinë</span>
+    </p>
+    <a class="ig-follow-btn" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+      @novae_thebrand
+    </a>
+  </div>
+</div>
 
 <!-- ═══ FOOTER ════════════════════════════════════════════ -->
-<footer class="reveal delay-2">
-  <div class="footer-wordmark">NOVAë</div>
-  <p class="footer-tag">
-    <span class="t-en">Crafted for the few.</span>
-    <span class="t-sq">Krijuar për pak.</span>
-  </p>
-  <div class="footer-links">
-    <a href="https://wa.me/355698998100" target="_blank" rel="noopener">WhatsApp</a>
-    <a href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener">Instagram</a>
+<footer class="page-section reveal delay-2">
+  <div class="section-inner">
+    <div class="footer-wordmark">NOVAë</div>
+    <p class="footer-tag">
+      <span class="t-en">Crafted for the few.</span>
+      <span class="t-sq">Krijuar për pak.</span>
+    </p>
+    <div class="footer-links">
+      <a href="https://wa.me/355698998100" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <p class="footer-copy">© 2026 NOVAë &nbsp;·&nbsp; Tirana, Albania</p>
   </div>
-  <p class="footer-copy">© 2025 NOVAë &nbsp;·&nbsp; Tirana, Albania</p>
 </footer>
 
 <!-- ═══ FLOATING WHATSAPP ════════════════════════════════ -->
-<a class="float-wa"
-   href="https://wa.me/355698998100?text=Hi%2C%20I'd%20like%20to%20know%20more%20about%20NOVAë."
-   target="_blank" rel="noopener" aria-label="Contact NOVAë on WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
+<a class="float-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'd%20like%20to%20know%20more%20about%20NOVAë." target="_blank" rel="noopener" aria-label="Contact on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
+<!-- ═══ LENIS — smooth page scroll ═══════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
 <script>
-  // ── Language Toggle ──────────────────────────────────
-  const langBtn = document.getElementById('langBtn');
-  let sq = false;
-  langBtn.addEventListener('click', () => {
-    sq = !sq;
-    document.body.classList.toggle('sq', sq);
-    document.documentElement.lang = sq ? 'sq' : 'en';
-    langBtn.textContent = sq ? 'EN' : 'AL';
+// ── 1. LENIS — butter-smooth vertical scroll ─────────────
+const lenis = new Lenis({
+  duration: 1.3,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  orientation: 'vertical',
+  smoothWheel: true,
+  wheelMultiplier: 0.85,
+});
+
+function lenisRaf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(lenisRaf);
+}
+requestAnimationFrame(lenisRaf);
+
+// Make Lenis work with anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    lenis.scrollTo(a.getAttribute('href'));
   });
+});
 
-  // ── Lookbook: Active piece + animation ───────────────
-  const lb     = document.getElementById('lookbook');
-  const dots   = document.querySelectorAll('.dot');
-  const pieces = document.querySelectorAll('.piece');
+// ── 2. LANGUAGE TOGGLE ───────────────────────────────────
+const langBtn = document.getElementById('langBtn');
+let sq = false;
+langBtn.addEventListener('click', () => {
+  sq = !sq;
+  document.body.classList.toggle('sq', sq);
+  document.documentElement.lang = sq ? 'sq' : 'en';
+  langBtn.textContent = sq ? 'EN' : 'AL';
+});
 
-  function setActive(idx) {
-    pieces.forEach((p, i) => p.classList.toggle('active', i === idx));
-    dots.forEach((d, i) => {
-      const on = i === idx;
-      d.classList.toggle('on', on);
-      d.setAttribute('aria-selected', on);
-    });
+// ── 3. CAROUSEL ──────────────────────────────────────────
+(function() {
+  const wrap   = document.getElementById('carouselWrap');
+  const track  = document.getElementById('carouselTrack');
+  const pieces = [...document.querySelectorAll('.piece')];
+  const dots   = [...document.querySelectorAll('.dot')];
+  const btnPrev = document.getElementById('arrowPrev');
+  const btnNext = document.getElementById('arrowNext');
+  const TOTAL   = pieces.length;
+
+  let cur     = 0;
+  let slideW  = wrap.offsetWidth;
+  let curX    = 0;   // current rendered X
+  let targX   = 0;   // target X (spring destination)
+  let rafId   = null;
+
+  // Drag state
+  let isDragging   = false;
+  let dragStartX   = 0;
+  let dragStartCurX = 0;
+  let prevDragX    = 0;
+  let velX         = 0;
+  let touchIsHoriz = null;
+  let touchStartY  = 0;
+
+  // ── Init ──
+  function resize() {
+    slideW = wrap.offsetWidth;
+    targX  = -cur * slideW;
+    curX   = targX;
+    track.style.transform = `translate3d(${curX}px,0,0)`;
   }
 
-  // Activate first piece immediately
-  setActive(0);
+  function setSlide(idx, instant) {
+    cur   = Math.max(0, Math.min(idx, TOTAL - 1));
+    targX = -cur * slideW;
+    if (instant) { curX = targX; track.style.transform = `translate3d(${curX}px,0,0)`; }
 
-  lb.addEventListener('scroll', () => {
-    const idx = Math.round(lb.scrollLeft / lb.offsetWidth);
-    setActive(idx);
+    // Dots
+    dots.forEach((d, i) => {
+      d.classList.toggle('on', i === cur);
+      d.setAttribute('aria-selected', i === cur);
+    });
+    // Piece content animation
+    pieces.forEach((p, i) => p.classList.toggle('active', i === cur));
+    // Arrow visibility
+    if (btnPrev) btnPrev.classList.toggle('hidden', cur === 0);
+    if (btnNext) btnNext.classList.toggle('hidden', cur === TOTAL - 1);
+  }
+
+  // ── Spring RAF loop ──
+  function startRaf() {
+    cancelAnimationFrame(rafId);
+    const tick = () => {
+      if (!isDragging) {
+        // lerp toward target — 0.09 = luxury spring feel
+        curX += (targX - curX) * 0.09;
+        if (Math.abs(targX - curX) < 0.04) curX = targX;
+      }
+      track.style.transform = `translate3d(${curX}px,0,0)`;
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+  }
+
+  // ── Edge resistance helper ──
+  function clampWithResist(x) {
+    const maxX = 0;
+    const minX = -(TOTAL - 1) * slideW;
+    if (x > maxX) return x * 0.18;
+    if (x < minX) return minX + (x - minX) * 0.18;
+    return x;
+  }
+
+  // ── Touch ──
+  wrap.addEventListener('touchstart', e => {
+    isDragging    = true;
+    touchIsHoriz  = null;
+    dragStartX    = e.touches[0].clientX;
+    touchStartY   = e.touches[0].clientY;
+    dragStartCurX = curX;
+    prevDragX     = dragStartX;
+    velX          = 0;
   }, { passive: true });
 
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      lb.scrollTo({ left: parseInt(dot.dataset.i) * lb.offsetWidth, behavior: 'smooth' });
-    });
+  wrap.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const x  = e.touches[0].clientX;
+    const y  = e.touches[0].clientY;
+    const dx = x - dragStartX;
+    const dy = y - touchStartY;
+
+    // Detect direction once
+    if (touchIsHoriz === null && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) {
+      touchIsHoriz = Math.abs(dx) > Math.abs(dy);
+    }
+    if (!touchIsHoriz) return; // vertical — let page/lenis handle it
+
+    e.preventDefault(); // horizontal — we handle it
+    velX  = x - prevDragX;
+    prevDragX = x;
+    curX  = clampWithResist(dragStartCurX + dx);
+  }, { passive: false });
+
+  wrap.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    snap();
   });
 
-  // ── Scroll Reveal ────────────────────────────────────
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => io.observe(el));
+  // ── Mouse drag ──
+  wrap.addEventListener('mousedown', e => {
+    isDragging    = true;
+    dragStartX    = e.clientX;
+    dragStartCurX = curX;
+    prevDragX     = e.clientX;
+    velX          = 0;
+    wrap.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const dx = e.clientX - dragStartX;
+    velX  = e.clientX - prevDragX;
+    prevDragX = e.clientX;
+    curX  = clampWithResist(dragStartCurX + dx);
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    wrap.classList.remove('dragging');
+    snap();
+  });
+
+  function snap() {
+    // Momentum: fast swipe skips to next/prev
+    if (Math.abs(velX) > 7) {
+      setSlide(velX < 0 ? cur + 1 : cur - 1);
+    } else {
+      setSlide(Math.round(-curX / slideW));
+    }
+  }
+
+  // ── Keyboard ──
+  window.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') setSlide(cur + 1);
+    if (e.key === 'ArrowLeft')  setSlide(cur - 1);
+  });
+
+  // ── Dots ──
+  dots.forEach(d => d.addEventListener('click', () => setSlide(+d.dataset.i)));
+
+  // ── Arrow buttons ──
+  btnPrev?.addEventListener('click', () => setSlide(cur - 1));
+  btnNext?.addEventListener('click', () => setSlide(cur + 1));
+
+  // ── Resize ──
+  window.addEventListener('resize', resize);
+
+  // ── Boot ──
+  resize();
+  setSlide(0, true);
+  startRaf();
+})();
+
+// ── 4. SCROLL REVEAL ─────────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
