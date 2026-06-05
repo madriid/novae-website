@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="NOVAë — Luxury women's clothing from Tirana, Albania. The Riviera Collection.">
+  <title>NOVAë</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET & TOKENS ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #F0EBE3;
+      --warm-white: #FAF7F3;
+      --burg:       #6B0F1A;
+      --burg-2:     #8C1728;
+      --ink:        #1A1109;
+      --muted:      #8B7B6F;
+      --border:     rgba(107, 15, 26, 0.14);
+      --display:    'Cormorant Garamond', serif;
+      --body:       'Jost', sans-serif;
+      --ease:       cubic-bezier(.4,0,.2,1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--body);
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── LANGUAGE SYSTEM ─────────────────────────────── */
+    .t-sq, .b-sq { display: none; }
+    body.sq .t-en, body.sq .b-en { display: none; }
+    body.sq .t-sq { display: inline; }
+    body.sq .b-sq { display: block; }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(240, 235, 227, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.45rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--burg);
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .nav-logo .star {
+      display: inline-block;
+      font-size: 0.5em;
+      vertical-align: super;
+      margin: 0 1px;
+      color: var(--burg);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .lang-btn {
+      font-family: var(--body);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: 1px solid rgba(139, 123, 111, 0.4);
+      border-radius: 2px;
+      padding: 4px 9px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      line-height: 1.5;
+    }
+    .lang-btn:hover { color: var(--burg); border-color: var(--burg); }
+
+    .nav-ig {
+      display: flex;
+      align-items: center;
+      color: var(--ink);
+      opacity: 0.65;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-ig:hover { opacity: 1; }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 28px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 85%, rgba(107,15,26,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 85% 15%, rgba(107,15,26,.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* subtle grain texture */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      background-size: 256px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 26px;
+      font-weight: 400;
+      opacity: 0;
+      animation: fadeUp .9s .2s var(--ease) forwards;
+    }
+
+    .hero-wordmark {
+      font-family: var(--display);
+      font-size: clamp(3.8rem, 18vw, 7rem);
+      font-weight: 300;
+      color: var(--burg);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      margin-bottom: 4px;
+      opacity: 0;
+      animation: fadeUp .9s .4s var(--ease) forwards;
+    }
+
+    .hero-divider {
+      width: 36px;
+      height: 1px;
+      background: var(--burg);
+      opacity: 0.35;
+      margin: 18px auto 18px;
+      opacity: 0;
+      animation: fadeIn .9s .6s ease forwards;
+    }
+
+    .hero-tagline {
+      font-family: var(--display);
+      font-size: clamp(1rem, 4.5vw, 1.35rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 44px;
+      line-height: 1.55;
+      opacity: 0;
+      animation: fadeUp .9s .7s var(--ease) forwards;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 38px;
+      background: var(--burg);
+      color: var(--cream);
+      text-decoration: none;
+      font-family: var(--body);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: background .25s, transform .25s;
+      opacity: 0;
+      animation: fadeUp .9s .9s var(--ease) forwards;
+    }
+    .hero-cta:hover { background: var(--burg-2); transform: translateY(-2px); }
+    .hero-cta:active { transform: translateY(0); }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s 1.6s ease forwards;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.52rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: drip 2.2s 2s infinite;
+    }
+
+    @keyframes drip {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      51%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    /* ── COLLECTION INTRO ────────────────────────────── */
+    .col-intro {
+      padding: 62px 28px 36px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .pill-tag {
+      display: inline-block;
+      font-size: 0.52rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--burg);
+      border: 1px solid var(--burg);
+      padding: 5px 14px;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .col-title {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 9vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .col-title em { font-style: italic; color: var(--burg); }
+
+    .col-desc {
+      font-size: 0.76rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 300px;
+      margin: 0 auto 28px;
+    }
+
+    .swipe-cue {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      opacity: 0.55;
+    }
+    .swipe-cue span {
+      font-size: 0.54rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── LOOKBOOK ────────────────────────────────────── */
+    .lookbook-wrap { position: relative; }
+
+    .lookbook {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    .lookbook:active { cursor: grabbing; }
+    .lookbook::-webkit-scrollbar { display: none; }
+
+    .piece {
+      min-width: 100vw;
+      width: 100vw;
+      height: 88svh;
+      scroll-snap-align: start;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .piece-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .piece-veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 35%,
+        rgba(20, 12, 6, .04) 55%,
+        rgba(20, 12, 6, .72) 100%
+      );
+    }
+
+    .piece-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      font-size: 0.48rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250,247,243,.88);
+      border: 1px solid rgba(250,247,243,.35);
+      padding: 4px 11px;
+      background: rgba(20,12,6,.18);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .piece-body {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 22px 22px 30px;
+    }
+
+    .piece-num {
+      font-family: var(--display);
+      font-size: 0.6rem;
+      color: rgba(250,247,243,.45);
+      letter-spacing: 0.22em;
+      margin-bottom: 5px;
+    }
+
+    .piece-name {
+      font-family: var(--display);
+      font-size: clamp(1.7rem, 7.5vw, 2.4rem);
+      font-weight: 300;
+      color: var(--warm-white);
+      line-height: 1.08;
+      margin-bottom: 8px;
+    }
+    .piece-name em { font-style: italic; }
+
+    .piece-desc {
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: rgba(250,247,243,.68);
+      line-height: 1.75;
+      margin-bottom: 20px;
+      max-width: 270px;
+    }
+
+    .piece-actions {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .btn-wa {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 13px 16px;
+      background: var(--warm-white);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: background .2s, transform .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-wa:hover { background: #fff; }
+    .btn-wa:active { transform: scale(.98); }
+
+    .btn-ig {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      flex-shrink: 0;
+      border: 1px solid rgba(250,247,243,.35);
+      color: var(--warm-white);
+      text-decoration: none;
+      transition: background .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-ig:hover { background: rgba(250,247,243,.12); }
+    .btn-ig:active { background: rgba(250,247,243,.2); }
+
+    /* ── PROGRESS DOTS ───────────────────────────────── */
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      padding: 14px 0 6px;
+    }
+
+    .dot {
+      width: 16px;
+      height: 2px;
+      background: rgba(107,15,26,.2);
+      cursor: pointer;
+      transition: width .3s var(--ease), background .3s;
+      border: none;
+      outline: none;
+    }
+    .dot.on { width: 32px; background: var(--burg); }
+
+    /* ── SECTION: BRAND STORY ────────────────────────── */
+    .story {
+      padding: 70px 28px 60px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-eyebrow {
+      font-size: 0.52rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .story-quote {
+      font-family: var(--display);
+      font-size: clamp(1.45rem, 6.5vw, 2.1rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .story-quote em { color: var(--burg); }
+
+    .story-body {
+      font-size: 0.77rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 2;
+      max-width: 310px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION: INSTAGRAM ──────────────────────────── */
+    .ig-section {
+      padding: 52px 28px 56px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: var(--warm-white);
+    }
+
+    .ig-follow-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 30px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: background .25s, color .25s;
+      margin-top: 20px;
+    }
+    .ig-follow-btn:hover { background: var(--ink); color: var(--cream); }
+    .ig-follow-btn:active { opacity: .9; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      padding: 44px 28px 36px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-wordmark {
+      font-family: var(--display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--burg);
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    .footer-tag {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 26px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 26px;
+    }
+    .footer-links a {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--burg); }
+
+    .footer-copy {
+      font-size: 0.58rem;
+      color: var(--muted);
+      opacity: 0.5;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FLOATING WHATSAPP ───────────────────────────── */
+    .float-wa {
+      position: fixed;
+      bottom: 22px;
+      right: 18px;
+      z-index: 300;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(37,211,102,.38), 0 2px 8px rgba(0,0,0,.12);
+      text-decoration: none;
+      transition: transform .25s var(--ease), box-shadow .25s;
+      animation: floatPulse 3s 2.5s ease-in-out infinite;
+    }
+    .float-wa:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(37,211,102,.5), 0 2px 10px rgba(0,0,0,.15);
+    }
+    .float-wa:active { transform: scale(.96); }
+
+    @keyframes floatPulse {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-5px); }
+    }
+
+    /* ── REVEAL ANIMATIONS ───────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .9s var(--ease), transform .9s var(--ease);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal.delay-1 { transition-delay: .15s; }
+    .reveal.delay-2 { transition-delay: .3s; }
+
+    /* ── DESKTOP TOUCH-UP ────────────────────────────── */
+    @media (min-width: 640px) {
+      .piece { height: 92svh; }
+      .piece-name { font-size: 2.6rem; }
+      .col-title { font-size: 3.4rem; }
+    }
+
+    @media (min-width: 1024px) {
+      .piece { max-width: 480px; }
+      .lookbook { justify-content: flex-start; }
+      nav { max-width: 480px; left: 50%; transform: translateX(-50%); right: auto; width: 100%; }
+      body { display: flex; flex-direction: column; align-items: center; }
+      section, .col-intro, .lookbook-wrap, footer { width: 100%; max-width: 480px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ════════════════════════════════════════════ -->
+<nav>
+  <a class="nav-logo" href="#">NOVAë</a>
+  <div class="nav-right">
+    <button class="lang-btn" id="langBtn" aria-label="Switch language">SQ</button>
+    <a class="nav-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5.5"/>
+        <circle cx="12" cy="12" r="4.2"/>
+        <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ════════════════════════════════════════════ -->
+<section class="hero">
+  <p class="hero-eyebrow">
+    <span class="t-en">Tirana, Albania &nbsp;·&nbsp; Est. 2024</span>
+    <span class="t-sq">Tiranë, Shqipëri &nbsp;·&nbsp; Est. 2024</span>
+  </p>
+  <h1 class="hero-wordmark">NOVAë</h1>
+  <div class="hero-divider"></div>
+  <p class="hero-tagline">
+    <span class="t-en">Crafted for the few.</span>
+    <span class="t-sq">Krijuar për pak.</span>
+  </p>
+  <a href="#collection" class="hero-cta">
+    <span class="t-en">Discover The Collection</span>
+    <span class="t-sq">Zbulo Koleksionin</span>
+  </a>
+  <div class="scroll-indicator" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>
+      <span class="t-en">Scroll</span>
+      <span class="t-sq">Rrëshqit</span>
+    </span>
+  </div>
+</section>
+
+<!-- ═══ COLLECTION INTRO ════════════════════════════════ -->
+<section class="col-intro reveal" id="collection">
+  <div class="pill-tag">
+    <span class="t-en">SS 2025 — Riviera</span>
+    <span class="t-sq">PV 2025 — Riviera</span>
+  </div>
+  <h2 class="col-title">
+    <span class="t-en">The <em>Riviera</em><br>Collection</span>
+    <span class="t-sq">Koleksioni<br><em>Riviera</em></span>
+  </h2>
+  <p class="col-desc">
+    <span class="t-en">Five pieces. Mediterranean light.<br>Women who dress only for themselves.</span>
+    <span class="t-sq">Pesë veshje. Dritë mesdhetare.<br>Gra që vishen vetëm për veten.</span>
+  </p>
+  <div class="swipe-cue" aria-hidden="true">
+    <svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1 5h20M15 1l6 4-6 4"/>
+    </svg>
+    <span>
+      <span class="t-en">Swipe to explore</span>
+      <span class="t-sq">Rrëshqit për të zbuluar</span>
+    </span>
+  </div>
+</section>
+
+<!-- ═══ LOOKBOOK ════════════════════════════════════════ -->
+<div class="lookbook-wrap">
+  <div class="lookbook" id="lookbook" role="region" aria-label="Product lookbook">
+
+    <!-- ─ 01 Minuit Charm Dress ─ -->
+    <article class="piece" aria-label="Minuit Charm Dress">
+      <img class="piece-img" src="images/MinuitCharmDress.png"
+           alt="Minuit Charm Dress — black halter mini dress" draggable="false">
+      <div class="piece-veil"></div>
+      <div class="piece-badge">
+        <span class="t-en">Riviera Collection</span>
+        <span class="t-sq">Koleksioni Riviera</span>
+      </div>
+      <div class="piece-body">
+        <p class="piece-num">01 / 05</p>
+        <h3 class="piece-name">Minuit <em>Charm</em><br>Dress</h3>
+        <p class="piece-desc">
+          <span class="t-en">Sleek halter silhouette in fluid black. For the woman who arrives and the room notices.</span>
+          <span class="t-sq">Siluetë halter në të zezë fluide. Për gruan e cila hyn dhe dhoma vëren.</span>
+        </p>
+        <div class="piece-actions">
+          <a class="btn-wa"
+             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Minuit%20Charm%20Dress."
+             target="_blank" rel="noopener" aria-label="Order Minuit Charm Dress on WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span class="t-en">Order via WhatsApp</span>
+            <span class="t-sq">Porosit në WhatsApp</span>
+          </a>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ─ 02 Belladonna Red Velvet ─ -->
+    <article class="piece" aria-label="Belladonna Dress in Red Velvet">
+      <img class="piece-img" src="images/Belladonna_Dress_in_Red_Velvet.png"
+           alt="Belladonna Dress in Red Velvet — structured corset midi dress" draggable="false">
+      <div class="piece-veil"></div>
+      <div class="piece-badge">
+        <span class="t-en">Riviera Collection</span>
+        <span class="t-sq">Koleksioni Riviera</span>
+      </div>
+      <div class="piece-body">
+        <p class="piece-num">02 / 05</p>
+        <h3 class="piece-name">Belladonna<br><em>in Red Velvet</em></h3>
+        <p class="piece-desc">
+          <span class="t-en">Structured corset bodice, sweeping midi skirt. A dress that commands every room it enters.</span>
+          <span class="t-sq">Korse e strukturuar, fund i gjerë midi. Një fustan që zotëron çdo sallë ku hyn.</span>
+        </p>
+        <div class="piece-actions">
+          <a class="btn-wa"
+             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Belladonna%20Dress%20in%20Red%20Velvet."
+             target="_blank" rel="noopener" aria-label="Order Belladonna Red Velvet on WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span class="t-en">Order via WhatsApp</span>
+            <span class="t-sq">Porosit në WhatsApp</span>
+          </a>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ─ 03 Belladonna Brownie ─ -->
+    <article class="piece" aria-label="Belladonna Dress in Brownie">
+      <img class="piece-img" src="images/Belladonna_Dress_in_Brownie.png"
+           alt="Belladonna Dress in Brownie — warm cocoa corset midi dress" draggable="false">
+      <div class="piece-veil"></div>
+      <div class="piece-badge">
+        <span class="t-en">Riviera Collection</span>
+        <span class="t-sq">Koleksioni Riviera</span>
+      </div>
+      <div class="piece-body">
+        <p class="piece-num">03 / 05</p>
+        <h3 class="piece-name">Belladonna<br><em>in Brownie</em></h3>
+        <p class="piece-desc">
+          <span class="t-en">The same architectural corset in warm earthy cocoa. Timeless femininity, rewritten.</span>
+          <span class="t-sq">E njëjta korse arkitekturore në kakao të ngrohtë. Femërorësi e përjetshme, e rishkruar.</span>
+        </p>
+        <div class="piece-actions">
+          <a class="btn-wa"
+             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Belladonna%20Dress%20in%20Brownie."
+             target="_blank" rel="noopener" aria-label="Order Belladonna Brownie on WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span class="t-en">Order via WhatsApp</span>
+            <span class="t-sq">Porosit në WhatsApp</span>
+          </a>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ─ 04 Terra Linen Set ─ -->
+    <article class="piece" aria-label="Terra Linen Set">
+      <img class="piece-img" src="images/Terra_Linen_Set.png"
+           style="object-position: center center;"
+           alt="Terra Linen Set — natural linen corset top and wide-leg trousers" draggable="false">
+      <div class="piece-veil"></div>
+      <div class="piece-badge">
+        <span class="t-en">Riviera Collection</span>
+        <span class="t-sq">Koleksioni Riviera</span>
+      </div>
+      <div class="piece-body">
+        <p class="piece-num">04 / 05</p>
+        <h3 class="piece-name">Terra<br><em>Linen Set</em></h3>
+        <p class="piece-desc">
+          <span class="t-en">Effortless structure. Corset top and wide-leg trousers in natural linen. Day to night.</span>
+          <span class="t-sq">Strukturë natyrale. Top korse dhe pantallona gjerë në liri natyral. Ditë dhe natë.</span>
+        </p>
+        <div class="piece-actions">
+          <a class="btn-wa"
+             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Terra%20Linen%20Set."
+             target="_blank" rel="noopener" aria-label="Order Terra Linen Set on WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span class="t-en">Order via WhatsApp</span>
+            <span class="t-sq">Porosit në WhatsApp</span>
+          </a>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ─ 05 Céleste Silk Top ─ -->
+    <article class="piece" aria-label="Céleste Silk Top">
+      <img class="piece-img" src="images/Ce_leste_Silk_Top.png"
+           style="object-position: center top;"
+           alt="Céleste Silk Top — bold geometric spiral print halter top" draggable="false">
+      <div class="piece-veil"></div>
+      <div class="piece-badge">
+        <span class="t-en">The Céleste Edit</span>
+        <span class="t-sq">Seria Céleste</span>
+      </div>
+      <div class="piece-body">
+        <p class="piece-num">05 / 05</p>
+        <h3 class="piece-name">Céleste<br><em>Silk Top</em></h3>
+        <p class="piece-desc">
+          <span class="t-en">A burst of colour. Silk halter printed in bold geometric spirals. Summer, unfiltered.</span>
+          <span class="t-sq">Një shpërthim ngjyrash. Halter mëndafshi me spirale gjeometrike. Vera, e pafiltruar.</span>
+        </p>
+        <div class="piece-actions">
+          <a class="btn-wa"
+             href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20C%C3%A9leste%20Silk%20Top."
+             target="_blank" rel="noopener" aria-label="Order Céleste Silk Top on WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span class="t-en">Order via WhatsApp</span>
+            <span class="t-sq">Porosit në WhatsApp</span>
+          </a>
+          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="View on Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </div><!-- /lookbook -->
+
+  <div class="dots" id="dots" role="tablist" aria-label="Collection navigation">
+    <button class="dot on" role="tab" aria-selected="true"  aria-label="Piece 1" data-i="0"></button>
+    <button class="dot"    role="tab" aria-selected="false" aria-label="Piece 2" data-i="1"></button>
+    <button class="dot"    role="tab" aria-selected="false" aria-label="Piece 3" data-i="2"></button>
+    <button class="dot"    role="tab" aria-selected="false" aria-label="Piece 4" data-i="3"></button>
+    <button class="dot"    role="tab" aria-selected="false" aria-label="Piece 5" data-i="4"></button>
+  </div>
+</div><!-- /lookbook-wrap -->
+
+<!-- ═══ STORY ════════════════════════════════════════════ -->
+<section class="story reveal">
+  <p class="section-eyebrow">
+    <span class="t-en">Our Story</span>
+    <span class="t-sq">Historia Jonë</span>
+  </p>
+  <blockquote class="story-quote">
+    <span class="t-en">"<em>NOVAë</em> is not a brand.<br>It is a feeling."</span>
+    <span class="t-sq">"<em>NOVAë</em> nuk është një markë.<br>Është një ndjenjë."</span>
+  </blockquote>
+  <p class="story-body">
+    <span class="t-en">Born in Tirana. Shaped by Mediterranean light and European sensibility. Each piece is made for the woman who moves through the world with quiet confidence — and dresses only for herself.</span>
+    <span class="t-sq">E lindur në Tiranë. E formuar nga drita mesdhetare dhe ndjeshmëria evropiane. Çdo veshje është bërë për gruan që lëviz në botë me besim të qetë — dhe vishet vetëm për veten e saj.</span>
+  </p>
+</section>
+
+<!-- ═══ INSTAGRAM ════════════════════════════════════════ -->
+<section class="ig-section reveal delay-1">
+  <p class="section-eyebrow">
+    <span class="t-en">Follow The Story</span>
+    <span class="t-sq">Ndiq Historinë</span>
+  </p>
+  <a class="ig-follow-btn" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+    @novae_thebrand
+  </a>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════ -->
+<footer class="reveal delay-2">
+  <div class="footer-wordmark">NOVAë</div>
+  <p class="footer-tag">
+    <span class="t-en">Crafted for the few.</span>
+    <span class="t-sq">Krijuar për pak.</span>
+  </p>
+  <div class="footer-links">
+    <a href="https://wa.me/355698998100" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener">Instagram</a>
+  </div>
+  <p class="footer-copy">© 2025 NOVAë &nbsp;·&nbsp; Tirana, Albania</p>
+</footer>
+
+<!-- ═══ FLOATING WHATSAPP ════════════════════════════════ -->
+<a class="float-wa"
+   href="https://wa.me/355698998100?text=Hi%2C%20I'd%20like%20to%20know%20more%20about%20NOVAë."
+   target="_blank" rel="noopener" aria-label="Contact NOVAë on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
+<script>
+  // ── Language Toggle ──────────────────────────────────
+  const langBtn = document.getElementById('langBtn');
+  let sq = false;
+  langBtn.addEventListener('click', () => {
+    sq = !sq;
+    document.body.classList.toggle('sq', sq);
+    document.documentElement.lang = sq ? 'sq' : 'en';
+    langBtn.textContent = sq ? 'EN' : 'SQ';
+  });
+
+  // ── Lookbook: Dots ───────────────────────────────────
+  const lb   = document.getElementById('lookbook');
+  const dots = document.querySelectorAll('.dot');
+
+  function updateDots() {
+    const idx = Math.round(lb.scrollLeft / lb.offsetWidth);
+    dots.forEach((d, i) => {
+      const on = i === idx;
+      d.classList.toggle('on', on);
+      d.setAttribute('aria-selected', on);
+    });
+  }
+
+  lb.addEventListener('scroll', updateDots, { passive: true });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      lb.scrollTo({ left: parseInt(dot.dataset.i) * lb.offsetWidth, behavior: 'smooth' });
+    });
+  });
+
+  // ── Lookbook: Drag-to-scroll (desktop) ──────────────
+  let isDown = false, startX, scrollLeftStart;
+  lb.addEventListener('mousedown', e => {
+    isDown = true;
+    lb.style.cursor = 'grabbing';
+    startX = e.pageX - lb.offsetLeft;
+    scrollLeftStart = lb.scrollLeft;
+  });
+  lb.addEventListener('mouseleave', () => { isDown = false; lb.style.cursor = 'grab'; });
+  lb.addEventListener('mouseup',    () => { isDown = false; lb.style.cursor = 'grab'; });
+  lb.addEventListener('mousemove',  e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x    = e.pageX - lb.offsetLeft;
+    const walk = (x - startX) * 1.4;
+    lb.scrollLeft = scrollLeftStart - walk;
+  });
+
+  // ── Scroll Reveal ────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
