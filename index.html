@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NOVAë — Luxury women's clothing from Tirana, Albania. The Riviera Collection.">
+  <meta name="description" content="NOVAë — Luxury women's clothing from Tirana, Albania.">
   <title>NOVAë</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* ── RESET ────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --cream:      #F0EBE3;
       --warm-white: #FAF7F3;
@@ -24,736 +22,273 @@
       --body:       'Jost', sans-serif;
       --spring:     cubic-bezier(.25,.46,.45,.94);
     }
+    html { -webkit-tap-highlight-color: transparent; text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+    body { background: var(--cream); color: var(--ink); font-family: var(--body); font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-    html {
-      -webkit-tap-highlight-color: transparent;
-      text-size-adjust: 100%;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-      background: var(--cream);
-      color: var(--ink);
-      font-family: var(--body);
-      font-weight: 300;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* ── LANGUAGE SYSTEM ─────────────────────────────── */
-    .t-sq, .b-sq { display: none; }
+    /* ── LANGUAGE ── */
+    .t-sq,.b-sq { display: none; }
     body.sq .t-en, body.sq .b-en { display: none; }
     body.sq .t-sq { display: inline; }
     body.sq .b-sq { display: block; }
 
-    /* ── NAV ─────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      background: rgba(240,235,227,0.85);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      transition: background .3s;
+    /* ── NAV ── */
+    nav { position: fixed; top:0; left:0; right:0; z-index:200; height:60px; background:rgba(240,235,227,.87); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border-bottom:1px solid var(--border); }
+    .nav-inner { width:100%; max-width:1400px; margin:0 auto; height:100%; display:flex; align-items:center; justify-content:space-between; padding:0 24px; }
+    .nav-logo { font-family:var(--display); font-size:1.5rem; font-weight:400; letter-spacing:.1em; color:var(--burg); text-decoration:none; }
+    .nav-right { display:flex; align-items:center; gap:16px; }
+    .lang-btn { font-family:var(--body); font-size:.6rem; font-weight:400; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); background:none; border:1px solid rgba(139,123,111,.4); border-radius:2px; padding:5px 10px; cursor:pointer; transition:color .2s,border-color .2s; line-height:1.5; }
+    .lang-btn:hover { color:var(--burg); border-color:var(--burg); }
+    .nav-ig { display:flex; align-items:center; color:var(--ink); opacity:.6; text-decoration:none; transition:opacity .2s; }
+    .nav-ig:hover { opacity:1; }
+
+    /* ── HERO ── */
+    .hero { min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:100px 32px 80px; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 50% at 15% 85%,rgba(107,15,26,.07) 0%,transparent 70%), radial-gradient(ellipse 50% 40% at 85% 15%,rgba(107,15,26,.05) 0%,transparent 70%); pointer-events:none; }
+    .hero-eyebrow { font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); margin-bottom:28px; font-weight:400; opacity:0; animation:fadeUp 1s .2s var(--spring) forwards; }
+    .hero-wordmark { font-family:var(--display); font-size:clamp(4rem,18vw,9rem); font-weight:300; color:var(--burg); letter-spacing:.08em; line-height:1; margin-bottom:6px; opacity:0; animation:fadeUp 1s .4s var(--spring) forwards; }
+    .hero-divider { width:40px; height:1px; background:var(--burg); margin:20px auto; opacity:0; animation:fadeIn 1s .6s ease forwards; }
+    .hero-tagline { font-family:var(--display); font-size:clamp(1.05rem,4vw,1.5rem); font-weight:300; font-style:italic; color:var(--muted); margin-bottom:48px; line-height:1.6; opacity:0; animation:fadeUp 1s .7s var(--spring) forwards; }
+    .hero-cta { display:inline-block; padding:15px 40px; background:var(--burg); color:var(--cream); text-decoration:none; font-family:var(--body); font-size:.6rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase; transition:background .3s,transform .3s var(--spring); opacity:0; animation:fadeUp 1s .9s var(--spring) forwards; }
+    .hero-cta:hover { background:var(--burg-2); transform:translateY(-2px); }
+    .scroll-indicator { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeIn 1s 1.8s ease forwards; }
+    .scroll-indicator span { font-size:.52rem; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
+    .scroll-line { width:1px; height:36px; background:linear-gradient(to bottom,var(--muted),transparent); animation:drip 2.4s 2.2s infinite; }
+    @keyframes drip { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    /* ── PAGE SECTIONS ── */
+    .page-section { width:100%; }
+    .section-inner { max-width:900px; margin:0 auto; padding-left:32px; padding-right:32px; }
+
+    /* ── COLLECTION INTRO ── */
+    .col-intro { padding:70px 0 40px; text-align:center; border-top:1px solid var(--border); }
+    .pill-tag { display:inline-block; font-size:.52rem; letter-spacing:.28em; text-transform:uppercase; color:var(--burg); border:1px solid var(--burg); padding:6px 16px; margin-bottom:22px; font-weight:400; }
+    .col-title { font-family:var(--display); font-size:clamp(2.4rem,8vw,4.5rem); font-weight:300; line-height:1.1; color:var(--ink); margin-bottom:18px; }
+    .col-title em { font-style:italic; color:var(--burg); }
+    .col-desc { font-size:.78rem; font-weight:300; color:var(--muted); line-height:2; max-width:340px; margin:0 auto 32px; }
+    .swipe-cue { display:flex; align-items:center; justify-content:center; gap:10px; opacity:.5; }
+    .swipe-cue span { font-size:.54rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+    /* ── CAROUSEL ── */
+    .carousel-wrap { position:relative; width:100%; overflow:hidden; user-select:none; -webkit-user-select:none; cursor:grab; touch-action:pan-y; }
+    .carousel-wrap.dragging { cursor:grabbing; }
+    .carousel-track { display:flex; will-change:transform; }
+    .piece { min-width:100%; width:100%; height:88svh; position:relative; overflow:hidden; flex-shrink:0; }
+
+    /* Image fills piece */
+    .piece-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; display:block; user-select:none; -webkit-user-drag:none; pointer-events:none; }
+
+    /* Clickable overlay over image (top 70%) */
+    .piece-gallery-btn { position:absolute; top:0; left:0; right:0; height:70%; background:none; border:none; cursor:pointer; z-index:4; padding:0; pointer-events:auto; }
+    .piece-gallery-hint { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:10px; color:rgba(255,255,255,.95); opacity:0; transition:opacity .3s; pointer-events:none; }
+    .piece-gallery-hint svg { width:28px; height:28px; }
+    .piece-gallery-hint span { font-size:.55rem; letter-spacing:.22em; text-transform:uppercase; }
+    .piece-gallery-btn:hover .piece-gallery-hint { opacity:1; }
+
+    /* Photo count badge — always visible */
+    .piece-count { position:absolute; top:18px; right:18px; z-index:5; background:rgba(0,0,0,.38); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.22); color:rgba(255,255,255,.9); font-size:.5rem; letter-spacing:.16em; padding:4px 10px; display:flex; align-items:center; gap:5px; text-transform:uppercase; pointer-events:none; }
+
+    .piece-veil { position:absolute; inset:0; background:linear-gradient(to bottom,transparent 30%,rgba(16,9,4,.04) 55%,rgba(16,9,4,.82) 100%); pointer-events:none; z-index:2; }
+    .piece-badge { position:absolute; top:20px; left:20px; font-size:.48rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(250,247,243,.88); border:1px solid rgba(250,247,243,.3); padding:5px 12px; background:rgba(16,9,4,.2); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:5; pointer-events:none; }
+
+    /* Animated piece content */
+    .piece-body { position:absolute; bottom:0; left:0; right:0; padding:24px 28px 36px; transform:translateY(18px); opacity:0; transition:transform .6s var(--spring),opacity .5s ease; z-index:5; pointer-events:auto; }
+    .piece.active .piece-body { transform:translateY(0); opacity:1; }
+    .piece-name { font-family:var(--display); font-size:clamp(1.8rem,7vw,3rem); font-weight:300; color:var(--warm-white); line-height:1.08; margin-bottom:20px; }
+    .piece-name em { font-style:italic; }
+    .piece-actions { display:flex; gap:10px; align-items:stretch; }
+    .btn-wa { flex:1; display:flex; align-items:center; justify-content:center; gap:9px; padding:13px 18px; background:var(--warm-white); color:var(--ink); text-decoration:none; font-size:.58rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; transition:background .2s,transform .15s; border:none; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+    .btn-wa:hover { background:#fff; }
+    .btn-wa:active { transform:scale(.98); }
+    .btn-ig { display:flex; align-items:center; justify-content:center; width:48px; flex-shrink:0; border:1px solid rgba(250,247,243,.32); color:var(--warm-white); text-decoration:none; transition:background .2s; -webkit-tap-highlight-color:transparent; }
+    .btn-ig:hover { background:rgba(250,247,243,.12); }
+
+    /* ── ARROWS ── */
+    .carousel-arrow { display:none; position:absolute; top:50%; transform:translateY(-50%); z-index:10; width:52px; height:52px; border-radius:50%; border:1px solid rgba(250,247,243,.38); background:rgba(16,9,4,.22); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); color:var(--warm-white); cursor:pointer; transition:background .25s,transform .25s var(--spring); align-items:center; justify-content:center; }
+    .carousel-arrow:hover { background:rgba(16,9,4,.45); transform:translateY(-50%) scale(1.06); }
+    .carousel-arrow.hidden { opacity:0; pointer-events:none; }
+    .arrow-prev { left:24px; }
+    .arrow-next { right:24px; }
+
+    /* ── DOTS ── */
+    .dots { display:flex; justify-content:center; gap:8px; padding:16px 0 8px; }
+    .dot { width:16px; height:2px; background:rgba(107,15,26,.2); cursor:pointer; transition:width .35s var(--spring),background .35s; border:none; outline:none; }
+    .dot.on { width:34px; background:var(--burg); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox { position:fixed; inset:0; z-index:2000; background:rgba(8,5,3,.97); display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s ease; }
+    .lightbox.open { opacity:1; pointer-events:all; }
+    .lb-close { position:absolute; top:18px; right:20px; background:none; border:none; color:rgba(255,255,255,.7); font-size:1.6rem; cursor:pointer; z-index:10; transition:color .2s; line-height:1; padding:6px; }
+    .lb-close:hover { color:#fff; }
+    .lb-title { position:absolute; top:20px; left:50%; transform:translateX(-50%); font-family:var(--display); font-size:1rem; font-weight:300; color:rgba(255,255,255,.75); letter-spacing:.12em; white-space:nowrap; pointer-events:none; }
+    .lb-nav { position:absolute; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(255,255,255,.6); font-size:2.4rem; cursor:pointer; padding:16px 20px; transition:color .2s; line-height:1; z-index:10; }
+    .lb-nav:hover { color:#fff; }
+    .lb-prev { left:0; }
+    .lb-next { right:0; }
+    .lb-nav.hidden { opacity:0; pointer-events:none; }
+    .lb-img-wrap { flex:1; display:flex; align-items:center; justify-content:center; width:100%; padding:70px 70px 10px; max-height:calc(100svh - 140px); }
+    .lb-img { max-width:100%; max-height:100%; object-fit:contain; user-select:none; -webkit-user-drag:none; transition:opacity .2s; }
+    .lb-img.fading { opacity:0; }
+    .lb-footer { display:flex; flex-direction:column; align-items:center; gap:10px; padding:10px 20px 24px; width:100%; }
+    .lb-counter { font-size:.55rem; letter-spacing:.2em; color:rgba(255,255,255,.4); text-transform:uppercase; }
+    .lb-thumbs { display:flex; gap:6px; overflow-x:auto; max-width:min(600px,100vw); padding:0 20px; scrollbar-width:none; }
+    .lb-thumbs::-webkit-scrollbar { display:none; }
+    .lb-thumb { width:44px; height:44px; object-fit:cover; flex-shrink:0; opacity:.4; cursor:pointer; border:1.5px solid transparent; transition:opacity .2s,border-color .2s; }
+    .lb-thumb.on { opacity:1; border-color:rgba(255,255,255,.8); }
+
+    /* ── ORDER SHEET ── */
+    .order-bg { position:fixed; inset:0; z-index:800; background:rgba(0,0,0,0); pointer-events:none; transition:background .35s; }
+    .order-bg.open { background:rgba(0,0,0,.55); pointer-events:all; }
+    .order-sheet { position:fixed; bottom:0; left:0; right:0; z-index:900; background:var(--warm-white); border-radius:20px 20px 0 0; padding:0 0 env(safe-area-inset-bottom,0); transform:translateY(100%); transition:transform .42s var(--spring); box-shadow:0 -8px 40px rgba(0,0,0,.18); max-height:92svh; overflow-y:auto; }
+    .order-sheet.open { transform:translateY(0); }
+    .order-drag { width:36px; height:4px; background:rgba(139,123,111,.3); border-radius:2px; margin:14px auto 0; }
+    .order-head { display:flex; align-items:center; justify-content:space-between; padding:16px 24px 0; }
+    .order-name { font-family:var(--display); font-size:1.4rem; font-weight:400; color:var(--burg); letter-spacing:.06em; }
+    .order-x { background:none; border:none; color:var(--muted); font-size:1.4rem; cursor:pointer; padding:4px; line-height:1; }
+    .order-x:hover { color:var(--ink); }
+    .order-body { padding:20px 24px 32px; }
+    .order-label { font-size:.55rem; letter-spacing:.26em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; margin-top:20px; }
+    .order-label:first-child { margin-top:0; }
+    .size-pills { display:flex; gap:8px; flex-wrap:wrap; }
+    .size-pill { padding:9px 18px; border:1px solid rgba(139,123,111,.35); background:none; color:var(--ink); font-family:var(--body); font-size:.62rem; font-weight:400; letter-spacing:.1em; cursor:pointer; transition:all .2s; border-radius:2px; }
+    .size-pill:hover { border-color:var(--burg); color:var(--burg); }
+    .size-pill.on { background:var(--burg); border-color:var(--burg); color:#fff; }
+    .pay-pills { display:flex; flex-direction:column; gap:8px; }
+    .pay-pill { padding:13px 18px; border:1px solid rgba(139,123,111,.35); background:none; color:var(--ink); font-family:var(--body); font-size:.68rem; font-weight:300; cursor:pointer; transition:all .2s; text-align:left; border-radius:2px; display:flex; align-items:center; gap:12px; }
+    .pay-pill .pay-icon { font-size:1rem; }
+    .pay-pill:hover { border-color:var(--burg); }
+    .pay-pill.on { border-color:var(--burg); background:rgba(107,15,26,.06); color:var(--burg); }
+    .pay-pill.on .pay-check { opacity:1; }
+    .pay-check { margin-left:auto; opacity:0; transition:opacity .2s; }
+    .order-send { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:16px; background:var(--burg); color:#fff; text-decoration:none; font-family:var(--body); font-size:.62rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; margin-top:24px; transition:background .25s,transform .15s; border:none; cursor:pointer; }
+    .order-send:hover { background:var(--burg-2); }
+    .order-send:active { transform:scale(.99); }
+    .order-send.disabled { opacity:.45; pointer-events:none; }
+    .order-note { font-size:.6rem; color:var(--muted); text-align:center; margin-top:12px; line-height:1.7; }
+
+    /* Desktop order sheet becomes centered modal */
+    @media (min-width:640px) {
+      .order-sheet { left:50%; right:auto; bottom:auto; top:50%; width:460px; transform:translate(-50%,calc(-50% + 30px)); border-radius:12px; opacity:0; transition:transform .42s var(--spring),opacity .35s; }
+      .order-sheet.open { transform:translate(-50%,-50%); opacity:1; }
     }
 
-    .nav-inner {
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    /* ── STORY ── */
+    .story { padding:80px 0 70px; text-align:center; border-top:1px solid var(--border); }
+    .section-eyebrow { font-size:.52rem; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); margin-bottom:24px; }
+    .story-quote { font-family:var(--display); font-size:clamp(1.5rem,5vw,2.6rem); font-weight:300; font-style:italic; color:var(--ink); line-height:1.45; margin-bottom:26px; }
+    .story-quote em { color:var(--burg); }
+    .story-body { font-size:.78rem; font-weight:300; color:var(--muted); line-height:2.1; max-width:440px; margin:0 auto; }
 
-    .nav-logo {
-      font-family: var(--display);
-      font-size: 1.5rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      color: var(--burg);
-      text-decoration: none;
-      line-height: 1;
-    }
+    /* ── IG ── */
+    .ig-section { padding:60px 0 65px; text-align:center; border-top:1px solid var(--border); background:var(--warm-white); }
+    .ig-follow-btn { display:inline-flex; align-items:center; gap:10px; padding:15px 32px; border:1px solid var(--ink); color:var(--ink); text-decoration:none; font-size:.62rem; font-weight:400; letter-spacing:.16em; text-transform:uppercase; transition:background .28s,color .28s; margin-top:22px; }
+    .ig-follow-btn:hover { background:var(--ink); color:var(--cream); }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    /* ── FOOTER ── */
+    footer { padding:52px 0 40px; text-align:center; border-top:1px solid var(--border); }
+    .footer-wordmark { font-family:var(--display); font-size:2.2rem; font-weight:300; color:var(--burg); letter-spacing:.12em; margin-bottom:12px; }
+    .footer-tag { font-family:var(--display); font-style:italic; font-size:.9rem; color:var(--muted); margin-bottom:28px; }
+    .footer-links { display:flex; justify-content:center; gap:32px; margin-bottom:28px; }
+    .footer-links a { font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
+    .footer-links a:hover { color:var(--burg); }
+    .footer-copy { font-size:.58rem; color:var(--muted); opacity:.5; }
 
-    .lang-btn {
-      font-family: var(--body);
-      font-size: 0.6rem;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: none;
-      border: 1px solid rgba(139,123,111,0.4);
-      border-radius: 2px;
-      padding: 5px 10px;
-      cursor: pointer;
-      transition: color .2s, border-color .2s;
-      line-height: 1.5;
-    }
-    .lang-btn:hover { color: var(--burg); border-color: var(--burg); }
+    /* ── FLOAT WA ── */
+    .float-wa { position:fixed; bottom:24px; right:20px; z-index:700; width:56px; height:56px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(37,211,102,.36),0 2px 8px rgba(0,0,0,.12); text-decoration:none; transition:transform .28s var(--spring),box-shadow .28s; animation:floatPulse 3.5s 2.5s ease-in-out infinite; }
+    .float-wa:hover { transform:scale(1.09); box-shadow:0 6px 26px rgba(37,211,102,.5); }
+    @keyframes floatPulse { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
 
-    .nav-ig {
-      display: flex;
-      align-items: center;
-      color: var(--ink);
-      opacity: 0.6;
-      text-decoration: none;
-      transition: opacity .2s;
-    }
-    .nav-ig:hover { opacity: 1; }
+    /* ── REVEAL ── */
+    .reveal { opacity:0; transform:translateY(32px); transition:opacity .9s var(--spring),transform .9s var(--spring); }
+    .reveal.in { opacity:1; transform:translateY(0); }
+    .reveal.delay-1 { transition-delay:.15s; }
+    .reveal.delay-2 { transition-delay:.3s; }
 
-    /* ── HERO ────────────────────────────────────────── */
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 100px 32px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 15% 85%, rgba(107,15,26,.07) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 85% 15%, rgba(107,15,26,.05) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 28px;
-      font-weight: 400;
-      will-change: opacity, transform;
-      opacity: 0;
-      animation: fadeUp 1s .2s var(--spring) forwards;
-    }
-
-    .hero-wordmark {
-      font-family: var(--display);
-      font-size: clamp(4rem, 18vw, 9rem);
-      font-weight: 300;
-      color: var(--burg);
-      letter-spacing: 0.08em;
-      line-height: 1;
-      margin-bottom: 6px;
-      will-change: opacity, transform;
-      opacity: 0;
-      animation: fadeUp 1s .4s var(--spring) forwards;
-    }
-
-    .hero-divider {
-      width: 40px;
-      height: 1px;
-      background: var(--burg);
-      margin: 20px auto;
-      opacity: 0;
-      animation: fadeIn 1s .6s ease forwards;
-    }
-
-    .hero-tagline {
-      font-family: var(--display);
-      font-size: clamp(1.05rem, 4vw, 1.5rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--muted);
-      margin-bottom: 48px;
-      line-height: 1.6;
-      will-change: opacity, transform;
-      opacity: 0;
-      animation: fadeUp 1s .7s var(--spring) forwards;
-    }
-
-    .hero-cta {
-      display: inline-block;
-      padding: 15px 40px;
-      background: var(--burg);
-      color: var(--cream);
-      text-decoration: none;
-      font-family: var(--body);
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      transition: background .3s, transform .3s var(--spring);
-      will-change: opacity, transform;
-      opacity: 0;
-      animation: fadeUp 1s .9s var(--spring) forwards;
-    }
-    .hero-cta:hover  { background: var(--burg-2); transform: translateY(-2px); }
-    .hero-cta:active { transform: translateY(0); }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 30px; left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-      animation: fadeIn 1s 1.8s ease forwards;
-    }
-    .scroll-indicator span {
-      font-size: 0.52rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .scroll-line {
-      width: 1px; height: 36px;
-      background: linear-gradient(to bottom, var(--muted), transparent);
-      animation: drip 2.4s 2.2s infinite;
-    }
-
-    @keyframes drip {
-      0%   { transform: scaleY(0); transform-origin: top;    }
-      50%  { transform: scaleY(1); transform-origin: top;    }
-      51%  { transform: scaleY(1); transform-origin: bottom; }
-      100% { transform: scaleY(0); transform-origin: bottom; }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0);    }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
-    }
-
-    /* ── PAGE WRAPPER (desktop centering) ─────────────── */
-    .page-section {
-      width: 100%;
-    }
-    .section-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding-left: 32px;
-      padding-right: 32px;
-    }
-
-    /* ── COLLECTION INTRO ────────────────────────────── */
-    .col-intro {
-      padding: 70px 0 40px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .pill-tag {
-      display: inline-block;
-      font-size: 0.52rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--burg);
-      border: 1px solid var(--burg);
-      padding: 6px 16px;
-      margin-bottom: 22px;
-      font-weight: 400;
-    }
-
-    .col-title {
-      font-family: var(--display);
-      font-size: clamp(2.4rem, 8vw, 4.5rem);
-      font-weight: 300;
-      line-height: 1.1;
-      color: var(--ink);
-      margin-bottom: 18px;
-    }
-    .col-title em { font-style: italic; color: var(--burg); }
-
-    .col-desc {
-      font-size: 0.78rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 2;
-      max-width: 340px;
-      margin: 0 auto 32px;
-    }
-
-    .swipe-cue {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      opacity: 0.5;
-    }
-    .swipe-cue span {
-      font-size: 0.54rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── CAROUSEL ────────────────────────────────────── */
-    .carousel-wrap {
-      position: relative;
-      width: 100%;
-      overflow: hidden;        /* clips the sliding track */
-      user-select: none;
-      -webkit-user-select: none;
-      cursor: grab;
-      touch-action: pan-y;    /* let vertical scroll pass through */
-    }
-    .carousel-wrap.dragging { cursor: grabbing; }
-
-    /* The sliding track — moved via JS transform */
-    .carousel-track {
-      display: flex;
-      will-change: transform;
-    }
-
-    .piece {
-      min-width: 100%;
-      width: 100%;
-      height: 88svh;
-      position: relative;
-      overflow: hidden;
-      flex-shrink: 0;
-      pointer-events: none; /* re-enabled per child */
-    }
-    .piece a, .piece button { pointer-events: auto; }
-
-    .piece-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-      user-select: none;
-      -webkit-user-drag: none;
-      pointer-events: none;
-    }
-
-    .piece-veil {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 30%,
-        rgba(16,9,4,.03) 55%,
-        rgba(16,9,4,.78) 100%
-      );
-    }
-
-    .piece-badge {
-      position: absolute;
-      top: 20px; left: 20px;
-      font-size: 0.48rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(250,247,243,.88);
-      border: 1px solid rgba(250,247,243,.32);
-      padding: 5px 12px;
-      background: rgba(16,9,4,.2);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    /* Content slides up when piece becomes active */
-    .piece-body {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 24px 28px 36px;
-      transform: translateY(18px);
-      opacity: 0;
-      transition:
-        transform .6s var(--spring),
-        opacity   .5s ease;
-    }
-    .piece.active .piece-body {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .piece-name {
-      font-family: var(--display);
-      font-size: clamp(1.8rem, 7vw, 3rem);
-      font-weight: 300;
-      color: var(--warm-white);
-      line-height: 1.08;
-      margin-bottom: 10px;
-    }
-    .piece-name em { font-style: italic; }
-
-    .piece-desc {
-      font-size: 0.7rem;
-      font-weight: 300;
-      color: rgba(250,247,243,.68);
-      line-height: 1.8;
-      margin-bottom: 22px;
-      max-width: 300px;
-    }
-
-    .piece-actions {
-      display: flex;
-      gap: 10px;
-      align-items: stretch;
-    }
-
-    .btn-wa {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 13px 18px;
-      background: var(--warm-white);
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 0.58rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      transition: background .2s, transform .15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn-wa:hover  { background: #fff; }
-    .btn-wa:active { transform: scale(.98); }
-
-    .btn-ig {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      flex-shrink: 0;
-      border: 1px solid rgba(250,247,243,.32);
-      color: var(--warm-white);
-      text-decoration: none;
-      transition: background .2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn-ig:hover  { background: rgba(250,247,243,.12); }
-    .btn-ig:active { background: rgba(250,247,243,.2);  }
-
-    /* ── DESKTOP CAROUSEL ARROWS ─────────────────────── */
-    .carousel-arrow {
-      display: none; /* hidden on mobile */
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      border: 1px solid rgba(250,247,243,.38);
-      background: rgba(16,9,4,.22);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: var(--warm-white);
-      cursor: pointer;
-      transition: background .25s, transform .25s var(--spring);
-      align-items: center;
-      justify-content: center;
-    }
-    .carousel-arrow:hover { background: rgba(16,9,4,.45); transform: translateY(-50%) scale(1.06); }
-    .carousel-arrow:active { transform: translateY(-50%) scale(.97); }
-    .arrow-prev { left: 24px;  }
-    .arrow-next { right: 24px; }
-    .carousel-arrow.hidden { opacity: 0; pointer-events: none; }
-
-    /* ── PROGRESS DOTS ───────────────────────────────── */
-    .dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px 0 8px;
-    }
-    .dot {
-      width: 16px; height: 2px;
-      background: rgba(107,15,26,.2);
-      cursor: pointer;
-      transition: width .35s var(--spring), background .35s;
-      border: none; outline: none;
-    }
-    .dot.on { width: 34px; background: var(--burg); }
-
-    /* ── STORY SECTION ───────────────────────────────── */
-    .story {
-      padding: 80px 0 70px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-eyebrow {
-      font-size: 0.52rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-
-    .story-quote {
-      font-family: var(--display);
-      font-size: clamp(1.5rem, 5vw, 2.6rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink);
-      line-height: 1.45;
-      margin-bottom: 26px;
-    }
-    .story-quote em { color: var(--burg); }
-
-    .story-body {
-      font-size: 0.78rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 2.1;
-      max-width: 440px;
-      margin: 0 auto;
-    }
-
-    /* ── INSTAGRAM ───────────────────────────────────── */
-    .ig-section {
-      padding: 60px 0 65px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      background: var(--warm-white);
-    }
-
-    .ig-follow-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 15px 32px;
-      border: 1px solid var(--ink);
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 0.62rem;
-      font-weight: 400;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      transition: background .28s, color .28s;
-      margin-top: 22px;
-    }
-    .ig-follow-btn:hover { background: var(--ink); color: var(--cream); }
-
-    /* ── FOOTER ──────────────────────────────────────── */
-    footer {
-      padding: 52px 0 40px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-wordmark {
-      font-family: var(--display);
-      font-size: 2.2rem;
-      font-weight: 300;
-      color: var(--burg);
-      letter-spacing: 0.12em;
-      margin-bottom: 12px;
-    }
-    .footer-tag {
-      font-family: var(--display);
-      font-style: italic;
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      margin-bottom: 28px;
-    }
-    .footer-links a {
-      font-size: 0.58rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .footer-links a:hover { color: var(--burg); }
-    .footer-copy {
-      font-size: 0.58rem;
-      color: var(--muted);
-      opacity: 0.5;
-    }
-
-    /* ── FLOATING WHATSAPP ───────────────────────────── */
-    .float-wa {
-      position: fixed;
-      bottom: 24px; right: 20px;
-      z-index: 300;
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: #25D366;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,.36), 0 2px 8px rgba(0,0,0,.12);
-      text-decoration: none;
-      transition: transform .28s var(--spring), box-shadow .28s;
-      animation: floatPulse 3.5s 2.5s ease-in-out infinite;
-    }
-    .float-wa:hover  { transform: scale(1.09); box-shadow: 0 6px 26px rgba(37,211,102,.5); }
-    .float-wa:active { transform: scale(.95); }
-
-    @keyframes floatPulse {
-      0%, 100% { transform: translateY(0);  }
-      50%       { transform: translateY(-5px); }
-    }
-
-    /* ── SCROLL REVEAL ───────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition:
-        opacity .9s var(--spring),
-        transform .9s var(--spring);
-    }
-    .reveal.in      { opacity: 1; transform: translateY(0); }
-    .reveal.delay-1 { transition-delay: .15s; }
-    .reveal.delay-2 { transition-delay: .3s;  }
-
-    /* ── RESPONSIVE ──────────────────────────────────── */
-    @media (min-width: 768px) {
-      .piece { height: 90svh; }
-      nav { padding: 0 40px; }
-    }
-
-    @media (min-width: 1024px) {
-      /* Show carousel arrows on desktop */
-      .carousel-arrow { display: flex; }
-      /* Swipe cue less relevant on desktop */
-      .swipe-cue { display: none; }
-      /* Bigger piece content area */
-      .piece-body { padding: 32px 60px 50px; max-width: 700px; }
-      .piece-desc { max-width: 420px; font-size: 0.76rem; }
-      /* Larger hero */
-      .hero { padding: 120px 60px 100px; }
-      /* Footer more spacious */
-      footer { padding: 70px 0 52px; }
-    }
-
-    @media (min-width: 1400px) {
-      .piece-body { padding: 36px 80px 60px; }
+    /* ── RESPONSIVE ── */
+    @media (min-width:768px) { .piece{height:90svh;} nav{padding:0 40px;} }
+    @media (min-width:1024px) {
+      .carousel-arrow { display:flex; }
+      .swipe-cue { display:none; }
+      .piece-body { padding:32px 60px 50px; max-width:700px; }
+      .lb-img-wrap { padding:80px 100px 10px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══ NAV ════════════════════════════════════════════ -->
+<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="#">NOVAë</a>
     <div class="nav-right">
-      <button class="lang-btn" id="langBtn" aria-label="Switch language">AL</button>
+      <button class="lang-btn" id="langBtn">AL</button>
       <a class="nav-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-          <rect x="2" y="2" width="20" height="20" rx="5.5"/>
-          <circle cx="12" cy="12" r="4.2"/>
-          <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>
-        </svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
       </a>
     </div>
   </div>
 </nav>
 
-<!-- ═══ HERO ════════════════════════════════════════════ -->
+<!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">
-    <span class="t-en">Tirana, Albania &nbsp;·&nbsp; Est. 2026</span>
-    <span class="t-sq">Tiranë, Shqipëri &nbsp;·&nbsp; Est. 2026</span>
-  </p>
+  <p class="hero-eyebrow"><span class="t-en">Tirana, Albania &nbsp;·&nbsp; Est. 2026</span><span class="t-sq">Tiranë, Shqipëri &nbsp;·&nbsp; Est. 2026</span></p>
   <h1 class="hero-wordmark">NOVAë</h1>
   <div class="hero-divider"></div>
-  <p class="hero-tagline">
-    <span class="t-en">Crafted for the few.</span>
-    <span class="t-sq">Krijuar për pak.</span>
-  </p>
-  <a href="#collection" class="hero-cta">
-    <span class="t-en">Discover The Collection</span>
-    <span class="t-sq">Zbulo Koleksionin</span>
-  </a>
+  <p class="hero-tagline"><span class="t-en">Crafted for the few.</span><span class="t-sq">Krijuar për pak.</span></p>
+  <a href="#collection" class="hero-cta"><span class="t-en">Discover The Collection</span><span class="t-sq">Zbulo Koleksionin</span></a>
   <div class="scroll-indicator" aria-hidden="true">
     <div class="scroll-line"></div>
     <span><span class="t-en">Scroll</span><span class="t-sq">Rrëshqit</span></span>
   </div>
 </section>
 
-<!-- ═══ COLLECTION INTRO ════════════════════════════════ -->
+<!-- COLLECTION INTRO -->
 <div class="page-section col-intro reveal" id="collection">
   <div class="section-inner">
-    <div class="pill-tag">
-      <span class="t-en">SS 2026 — Riviera</span>
-      <span class="t-sq">PV 2026 — Riviera</span>
-    </div>
-    <h2 class="col-title">
-      <span class="t-en">The <em>Riviera</em><br>Collection</span>
-      <span class="t-sq">Koleksioni<br><em>Riviera</em></span>
-    </h2>
-    <p class="col-desc">
-      <span class="t-en">Five pieces. Mediterranean light.<br>Women who dress only for themselves.</span>
-      <span class="t-sq">Pesë veshje. Dritë mesdhetare.<br>Gra që vishen vetëm për veten.</span>
-    </p>
+    <div class="pill-tag"><span class="t-en">SS 2026 — Riviera</span><span class="t-sq">PV 2026 — Riviera</span></div>
+    <h2 class="col-title"><span class="t-en">The <em>Riviera</em><br>Collection</span><span class="t-sq">Koleksioni<br><em>Riviera</em></span></h2>
+    <p class="col-desc"><span class="t-en">Four pieces. Mediterranean light.<br>Women who dress only for themselves.</span><span class="t-sq">Katër veshje. Dritë mesdhetare.<br>Gra që vishen vetëm për veten.</span></p>
     <div class="swipe-cue" aria-hidden="true">
-      <svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1 5h20M15 1l6 4-6 4"/>
-      </svg>
-      <span>
-        <span class="t-en">Swipe to explore</span>
-        <span class="t-sq">Rrëshqit për të zbuluar</span>
-      </span>
+      <svg width="22" height="10" viewBox="0 0 22 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h20M15 1l6 4-6 4"/></svg>
+      <span><span class="t-en">Swipe to explore</span><span class="t-sq">Rrëshqit për të zbuluar</span></span>
     </div>
   </div>
 </div>
 
-<!-- ═══ CAROUSEL ════════════════════════════════════════ -->
-<div class="carousel-wrap" id="carouselWrap" role="region" aria-label="Product lookbook">
-
-  <!-- Desktop arrow buttons -->
-  <button class="carousel-arrow arrow-prev" id="arrowPrev" aria-label="Previous piece">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M15 18l-6-6 6-6"/>
-    </svg>
+<!-- CAROUSEL -->
+<div class="carousel-wrap" id="carouselWrap">
+  <button class="carousel-arrow arrow-prev" id="arrowPrev" aria-label="Previous">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
   </button>
-  <button class="carousel-arrow arrow-next" id="arrowNext" aria-label="Next piece">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 18l6-6-6-6"/>
-    </svg>
+  <button class="carousel-arrow arrow-next" id="arrowNext" aria-label="Next">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
   </button>
 
-  <!-- Sliding track -->
   <div class="carousel-track" id="carouselTrack">
 
-    <!-- ─ 01 Minuit Charm Dress ─ -->
-    <article class="piece active" aria-label="Minuit Charm Dress">
-      <img class="piece-img" src="images/MinuitCharmDress.png" alt="Minuit Charm Dress" draggable="false">
-      <div class="piece-veil"></div>
-      <div class="piece-badge">
-        <span class="t-en">Riviera Collection</span>
-        <span class="t-sq">Koleksioni Riviera</span>
+    <!-- 01 HALTER MINI DRESS -->
+    <article class="piece active" data-product="halter">
+      <img class="piece-img" src="images/halter_mini_dress/1.jpg" alt="Halter Mini Dress">
+      <button class="piece-gallery-btn" data-product="halter" aria-label="View all photos">
+        <div class="piece-gallery-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span><span class="t-en">View All Photos</span><span class="t-sq">Shiko Të Gjitha</span></span>
+        </div>
+      </button>
+      <div class="piece-count">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        8
       </div>
+      <div class="piece-veil"></div>
+      <div class="piece-badge"><span class="t-en">Riviera Collection</span><span class="t-sq">Koleksioni Riviera</span></div>
       <div class="piece-body">
-        <h3 class="piece-name">Minuit <em>Charm</em><br>Dress</h3>
-        <p class="piece-desc">
-          <span class="t-en">Sleek halter silhouette in fluid black. For the woman who arrives and the room notices.</span>
-          <span class="t-sq">Siluetë halter në të zezë fluide. Për gruan e cila hyn dhe dhoma vëren.</span>
-        </p>
+        <h3 class="piece-name">Halter <em>Mini Dress</em></h3>
         <div class="piece-actions">
-          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Minuit%20Charm%20Dress." target="_blank" rel="noopener">
+          <button class="btn-wa" data-product="halter">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
-          </a>
+          </button>
           <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
@@ -761,25 +296,28 @@
       </div>
     </article>
 
-    <!-- ─ 02 Belladonna Red Velvet ─ -->
-    <article class="piece" aria-label="Belladonna Dress in Red Velvet">
-      <img class="piece-img" src="images/Belladonna_Dress_in_Red_Velvet.png" alt="Belladonna Dress in Red Velvet" draggable="false">
-      <div class="piece-veil"></div>
-      <div class="piece-badge">
-        <span class="t-en">Riviera Collection</span>
-        <span class="t-sq">Koleksioni Riviera</span>
+    <!-- 02 MINTÉ LINEN DRESS -->
+    <article class="piece" data-product="minte">
+      <img class="piece-img" src="images/minte_linen_dress/1.jpg" alt="Minté Linen Dress">
+      <button class="piece-gallery-btn" data-product="minte" aria-label="View all photos">
+        <div class="piece-gallery-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span><span class="t-en">View All Photos</span><span class="t-sq">Shiko Të Gjitha</span></span>
+        </div>
+      </button>
+      <div class="piece-count">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        6
       </div>
+      <div class="piece-veil"></div>
+      <div class="piece-badge"><span class="t-en">Riviera Collection</span><span class="t-sq">Koleksioni Riviera</span></div>
       <div class="piece-body">
-        <h3 class="piece-name">Belladonna<br><em>in Red Velvet</em></h3>
-        <p class="piece-desc">
-          <span class="t-en">Structured corset bodice, sweeping midi skirt. A dress that commands every room.</span>
-          <span class="t-sq">Korse e strukturuar, fund i gjerë midi. Një fustan që zotëron çdo sallë.</span>
-        </p>
+        <h3 class="piece-name">Minté <em>Linen Dress</em></h3>
         <div class="piece-actions">
-          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Belladonna%20Dress%20in%20Red%20Velvet." target="_blank" rel="noopener">
+          <button class="btn-wa" data-product="minte">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
-          </a>
+          </button>
           <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
@@ -787,25 +325,28 @@
       </div>
     </article>
 
-    <!-- ─ 03 Belladonna Brownie ─ -->
-    <article class="piece" aria-label="Belladonna Dress in Brownie">
-      <img class="piece-img" src="images/Belladonna_Dress_in_Brownie.png" alt="Belladonna Dress in Brownie" draggable="false">
-      <div class="piece-veil"></div>
-      <div class="piece-badge">
-        <span class="t-en">Riviera Collection</span>
-        <span class="t-sq">Koleksioni Riviera</span>
+    <!-- 03 TERRA LINEN SET -->
+    <article class="piece" data-product="terra">
+      <img class="piece-img" src="images/terra_linen_set/1.jpg" alt="Terra Linen Set">
+      <button class="piece-gallery-btn" data-product="terra" aria-label="View all photos">
+        <div class="piece-gallery-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span><span class="t-en">View All Photos</span><span class="t-sq">Shiko Të Gjitha</span></span>
+        </div>
+      </button>
+      <div class="piece-count">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        7
       </div>
+      <div class="piece-veil"></div>
+      <div class="piece-badge"><span class="t-en">Riviera Collection</span><span class="t-sq">Koleksioni Riviera</span></div>
       <div class="piece-body">
-        <h3 class="piece-name">Belladonna<br><em>in Brownie</em></h3>
-        <p class="piece-desc">
-          <span class="t-en">The same architectural corset in warm earthy cocoa. Timeless femininity, rewritten.</span>
-          <span class="t-sq">E njëjta korse në kakao të ngrohtë. Femërorësi e përjetshme, e rishkruar.</span>
-        </p>
+        <h3 class="piece-name">Terra <em>Linen Set</em></h3>
         <div class="piece-actions">
-          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Belladonna%20Dress%20in%20Brownie." target="_blank" rel="noopener">
+          <button class="btn-wa" data-product="terra">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
-          </a>
+          </button>
           <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
@@ -813,25 +354,24 @@
       </div>
     </article>
 
-    <!-- ─ 04 Terra Linen Set ─ -->
-    <article class="piece" aria-label="Terra Linen Set">
-      <img class="piece-img" src="images/Terra_Linen_Set.png" style="object-position: center center;" alt="Terra Linen Set" draggable="false">
+    <!-- 04 VALÉ LINEN DRESS -->
+    <article class="piece" data-product="vale">
+      <img class="piece-img" src="images/vale_linen_dress/1.jpg" alt="Valé Linen Dress" style="object-position:center top;">
+      <button class="piece-gallery-btn" data-product="vale" aria-label="View photo">
+        <div class="piece-gallery-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          <span><span class="t-en">View Full Photo</span><span class="t-sq">Shiko Foton</span></span>
+        </div>
+      </button>
       <div class="piece-veil"></div>
-      <div class="piece-badge">
-        <span class="t-en">Riviera Collection</span>
-        <span class="t-sq">Koleksioni Riviera</span>
-      </div>
+      <div class="piece-badge"><span class="t-en">Riviera Collection</span><span class="t-sq">Koleksioni Riviera</span></div>
       <div class="piece-body">
-        <h3 class="piece-name">Terra<br><em>Linen Set</em></h3>
-        <p class="piece-desc">
-          <span class="t-en">Effortless structure. Corset top and wide-leg trousers in natural linen. Day to night.</span>
-          <span class="t-sq">Strukturë natyrale. Top korse dhe pantallona gjerë në liri natyral. Ditë dhe natë.</span>
-        </p>
+        <h3 class="piece-name">Valé <em>Linen Dress</em></h3>
         <div class="piece-actions">
-          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20Terra%20Linen%20Set." target="_blank" rel="noopener">
+          <button class="btn-wa" data-product="vale">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
-          </a>
+          </button>
           <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
           </a>
@@ -839,69 +379,81 @@
       </div>
     </article>
 
-    <!-- ─ 05 Céleste Silk Top ─ -->
-    <article class="piece" aria-label="Céleste Silk Top">
-      <img class="piece-img" src="images/Ce_leste_Silk_Top.png" style="object-position: center top;" alt="Céleste Silk Top" draggable="false">
-      <div class="piece-veil"></div>
-      <div class="piece-badge">
-        <span class="t-en">The Céleste Edit</span>
-        <span class="t-sq">Seria Céleste</span>
-      </div>
-      <div class="piece-body">
-        <h3 class="piece-name">Céleste<br><em>Silk Top</em></h3>
-        <p class="piece-desc">
-          <span class="t-en">A burst of colour. Silk halter printed in bold geometric spirals. Summer, unfiltered.</span>
-          <span class="t-sq">Një shpërthim ngjyrash. Halter mëndafshi me spirale gjeometrike. Vera, e pafiltruar.</span>
-        </p>
-        <div class="piece-actions">
-          <a class="btn-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'm%20interested%20in%20the%20C%C3%A9leste%20Silk%20Top." target="_blank" rel="noopener">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span class="t-en">Order via WhatsApp</span><span class="t-sq">Porosit në WhatsApp</span>
-          </a>
-          <a class="btn-ig" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
-          </a>
-        </div>
-      </div>
-    </article>
+  </div><!-- /track -->
 
-  </div><!-- /carousel-track -->
-
-  <div class="dots" id="dots" role="tablist" aria-label="Collection navigation">
-    <button class="dot on" role="tab" aria-selected="true"  data-i="0" aria-label="Piece 1"></button>
-    <button class="dot"    role="tab" aria-selected="false" data-i="1" aria-label="Piece 2"></button>
-    <button class="dot"    role="tab" aria-selected="false" data-i="2" aria-label="Piece 3"></button>
-    <button class="dot"    role="tab" aria-selected="false" data-i="3" aria-label="Piece 4"></button>
-    <button class="dot"    role="tab" aria-selected="false" data-i="4" aria-label="Piece 5"></button>
+  <div class="dots" id="dots">
+    <button class="dot on" data-i="0" aria-label="1"></button>
+    <button class="dot"    data-i="1" aria-label="2"></button>
+    <button class="dot"    data-i="2" aria-label="3"></button>
+    <button class="dot"    data-i="3" aria-label="4"></button>
   </div>
+</div><!-- /carousel -->
 
-</div><!-- /carousel-wrap -->
-
-<!-- ═══ STORY ════════════════════════════════════════════ -->
-<div class="page-section story reveal">
-  <div class="section-inner">
-    <p class="section-eyebrow">
-      <span class="t-en">Our Story</span>
-      <span class="t-sq">Historia Jonë</span>
-    </p>
-    <blockquote class="story-quote">
-      <span class="t-en">"<em>NOVAë</em> is not a brand.<br>It is a feeling."</span>
-      <span class="t-sq">"<em>NOVAë</em> nuk është një markë.<br>Është një ndjenjë."</span>
-    </blockquote>
-    <p class="story-body">
-      <span class="t-en">Born in Tirana. Shaped by Mediterranean light and European sensibility. Each piece is made for the woman who moves through the world with quiet confidence — and dresses only for herself.</span>
-      <span class="t-sq">E lindur në Tiranë. E formuar nga drita mesdhetare dhe ndjeshmëria evropiane. Çdo veshje është bërë për gruan që lëviz në botë me besim të qetë — dhe vishet vetëm për veten e saj.</span>
-    </p>
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery">
+  <button class="lb-close" id="lbClose" aria-label="Close">&#x2715;</button>
+  <p class="lb-title" id="lbTitle"></p>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next">&#8250;</button>
+  <div class="lb-img-wrap"><img class="lb-img" id="lbImg" src="" alt=""></div>
+  <div class="lb-footer">
+    <span class="lb-counter" id="lbCounter"></span>
+    <div class="lb-thumbs" id="lbThumbs"></div>
   </div>
 </div>
 
-<!-- ═══ INSTAGRAM ════════════════════════════════════════ -->
+<!-- ORDER SHEET -->
+<div id="orderBg" class="order-bg"></div>
+<div id="orderSheet" class="order-sheet" role="dialog" aria-modal="true">
+  <div class="order-drag"></div>
+  <div class="order-head">
+    <p class="order-name" id="orderName">—</p>
+    <button class="order-x" id="orderClose">&#x2715;</button>
+  </div>
+  <div class="order-body">
+    <p class="order-label"><span class="t-en">Size</span><span class="t-sq">Madhësia</span></p>
+    <div class="size-pills">
+      <button class="size-pill" data-size="XS">XS</button>
+      <button class="size-pill" data-size="S">S</button>
+      <button class="size-pill" data-size="M">M</button>
+      <button class="size-pill" data-size="L">L</button>
+      <button class="size-pill" data-size="XL">XL</button>
+    </div>
+    <p class="order-label"><span class="t-en">Payment Method</span><span class="t-sq">Metoda e Pagesës</span></p>
+    <div class="pay-pills">
+      <button class="pay-pill on" data-pay="cod">
+        <span class="pay-icon">💵</span>
+        <span><strong><span class="t-en">Cash on Delivery</span><span class="t-sq">Para me Dorëzim</span></strong></span>
+        <svg class="pay-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+      <button class="pay-pill" data-pay="bank">
+        <span class="pay-icon">🏦</span>
+        <span><strong><span class="t-en">Bank Transfer</span><span class="t-sq">Transfer Bankar</span></strong></span>
+        <svg class="pay-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    </div>
+    <a id="orderSend" class="order-send disabled" href="#" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span class="t-en">Send Order via WhatsApp</span><span class="t-sq">Dërgo Porosinë në WhatsApp</span>
+    </a>
+    <p class="order-note t-en">Select a size to continue · We confirm within 24h</p>
+    <p class="order-note t-sq">Zgjidhni madhësinë · Konfirmojmë brenda 24 orësh</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<div class="page-section story reveal">
+  <div class="section-inner">
+    <p class="section-eyebrow"><span class="t-en">Our Story</span><span class="t-sq">Historia Jonë</span></p>
+    <blockquote class="story-quote"><span class="t-en">"<em>NOVAë</em> is not a brand.<br>It is a feeling."</span><span class="t-sq">"<em>NOVAë</em> nuk është një markë.<br>Është një ndjenjë."</span></blockquote>
+    <p class="story-body"><span class="t-en">Born in Tirana. Shaped by Mediterranean light and European sensibility. Each piece is made for the woman who moves through the world with quiet confidence — and dresses only for herself.</span><span class="t-sq">E lindur në Tiranë. E formuar nga drita mesdhetare dhe ndjeshmëria evropiane. Çdo veshje është bërë për gruan që lëviz në botë me besim të qetë — dhe vishet vetëm për veten e saj.</span></p>
+  </div>
+</div>
+
+<!-- INSTAGRAM -->
 <div class="page-section ig-section reveal delay-1">
   <div class="section-inner">
-    <p class="section-eyebrow">
-      <span class="t-en">Follow The Story</span>
-      <span class="t-sq">Ndiq Historinë</span>
-    </p>
+    <p class="section-eyebrow"><span class="t-en">Follow The Story</span><span class="t-sq">Ndiq Historinë</span></p>
     <a class="ig-follow-btn" href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
       @novae_thebrand
@@ -909,14 +461,11 @@
   </div>
 </div>
 
-<!-- ═══ FOOTER ════════════════════════════════════════════ -->
+<!-- FOOTER -->
 <footer class="page-section reveal delay-2">
   <div class="section-inner">
     <div class="footer-wordmark">NOVAë</div>
-    <p class="footer-tag">
-      <span class="t-en">Crafted for the few.</span>
-      <span class="t-sq">Krijuar për pak.</span>
-    </p>
+    <p class="footer-tag"><span class="t-en">Crafted for the few.</span><span class="t-sq">Krijuar për pak.</span></p>
     <div class="footer-links">
       <a href="https://wa.me/355698998100" target="_blank" rel="noopener">WhatsApp</a>
       <a href="https://www.instagram.com/novae_thebrand" target="_blank" rel="noopener">Instagram</a>
@@ -925,225 +474,225 @@
   </div>
 </footer>
 
-<!-- ═══ FLOATING WHATSAPP ════════════════════════════════ -->
+<!-- FLOATING WA -->
 <a class="float-wa" href="https://wa.me/355698998100?text=Hi%2C%20I'd%20like%20to%20know%20more%20about%20NOVAë." target="_blank" rel="noopener" aria-label="Contact on WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- ═══ LENIS — smooth page scroll ═══════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-
 <script>
-// ── 1. LENIS — butter-smooth vertical scroll ─────────────
-const lenis = new Lenis({
-  duration: 1.3,
-  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  orientation: 'vertical',
-  smoothWheel: true,
-  wheelMultiplier: 0.85,
-});
+// ── LENIS ────────────────────────────────────────────────
+const lenis = new Lenis({ duration:1.3, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)), orientation:'vertical', smoothWheel:true, wheelMultiplier:0.85 });
+(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();lenis.scrollTo(a.getAttribute('href'));}));
 
-function lenisRaf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(lenisRaf);
-}
-requestAnimationFrame(lenisRaf);
-
-// Make Lenis work with anchor links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    lenis.scrollTo(a.getAttribute('href'));
-  });
-});
-
-// ── 2. LANGUAGE TOGGLE ───────────────────────────────────
+// ── LANGUAGE ─────────────────────────────────────────────
 const langBtn = document.getElementById('langBtn');
-let sq = false;
-langBtn.addEventListener('click', () => {
-  sq = !sq;
-  document.body.classList.toggle('sq', sq);
-  document.documentElement.lang = sq ? 'sq' : 'en';
-  langBtn.textContent = sq ? 'EN' : 'AL';
+let isSq = false;
+langBtn.addEventListener('click', ()=>{
+  isSq = !isSq;
+  document.body.classList.toggle('sq', isSq);
+  document.documentElement.lang = isSq ? 'sq' : 'en';
+  langBtn.textContent = isSq ? 'EN' : 'AL';
+  // Refresh order sheet name if open
+  if (activeProduct) document.getElementById('orderName').textContent = GALLERY[activeProduct][isSq?'nameSq':'nameEn'];
 });
 
-// ── 3. CAROUSEL ──────────────────────────────────────────
-(function() {
-  const wrap   = document.getElementById('carouselWrap');
-  const track  = document.getElementById('carouselTrack');
+// ── PRODUCT DATA ─────────────────────────────────────────
+const GALLERY = {
+  halter: { folder:'halter_mini_dress', count:8,  nameEn:'Halter Mini Dress', nameSq:'Halter Mini Dress' },
+  minte:  { folder:'minte_linen_dress',  count:6,  nameEn:'Minté Linen Dress',  nameSq:'Minté Linen Dress' },
+  terra:  { folder:'terra_linen_set',    count:7,  nameEn:'Terra Linen Set',    nameSq:'Terra Linen Set' },
+  vale:   { folder:'vale_linen_dress',   count:1,  nameEn:'Valé Linen Dress',   nameSq:'Valé Linen Dress' },
+};
+
+// ── CAROUSEL ─────────────────────────────────────────────
+(function(){
+  const wrap  = document.getElementById('carouselWrap');
+  const track = document.getElementById('carouselTrack');
   const pieces = [...document.querySelectorAll('.piece')];
   const dots   = [...document.querySelectorAll('.dot')];
-  const btnPrev = document.getElementById('arrowPrev');
-  const btnNext = document.getElementById('arrowNext');
-  const TOTAL   = pieces.length;
+  const btnP   = document.getElementById('arrowPrev');
+  const btnN   = document.getElementById('arrowNext');
+  const TOTAL  = pieces.length;
+  let cur=0, slideW=wrap.offsetWidth, curX=0, targX=0, rafId=null;
+  let isDragging=false, dragStartX=0, dragStartCurX=0, prevDragX=0, velX=0;
+  let touchIsHoriz=null, touchStartY=0, didDrag=false;
 
-  let cur     = 0;
-  let slideW  = wrap.offsetWidth;
-  let curX    = 0;   // current rendered X
-  let targX   = 0;   // target X (spring destination)
-  let rafId   = null;
+  function resize(){ slideW=wrap.offsetWidth; targX=-cur*slideW; curX=targX; track.style.transform=`translate3d(${curX}px,0,0)`; }
 
-  // Drag state
-  let isDragging   = false;
-  let dragStartX   = 0;
-  let dragStartCurX = 0;
-  let prevDragX    = 0;
-  let velX         = 0;
-  let touchIsHoriz = null;
-  let touchStartY  = 0;
-
-  // ── Init ──
-  function resize() {
-    slideW = wrap.offsetWidth;
-    targX  = -cur * slideW;
-    curX   = targX;
-    track.style.transform = `translate3d(${curX}px,0,0)`;
+  function setSlide(idx, instant){
+    cur=Math.max(0,Math.min(idx,TOTAL-1)); targX=-cur*slideW;
+    if(instant){curX=targX;track.style.transform=`translate3d(${curX}px,0,0)`;}
+    dots.forEach((d,i)=>{d.classList.toggle('on',i===cur);d.setAttribute('aria-selected',i===cur);});
+    pieces.forEach((p,i)=>p.classList.toggle('active',i===cur));
+    if(btnP) btnP.classList.toggle('hidden',cur===0);
+    if(btnN) btnN.classList.toggle('hidden',cur===TOTAL-1);
   }
 
-  function setSlide(idx, instant) {
-    cur   = Math.max(0, Math.min(idx, TOTAL - 1));
-    targX = -cur * slideW;
-    if (instant) { curX = targX; track.style.transform = `translate3d(${curX}px,0,0)`; }
-
-    // Dots
-    dots.forEach((d, i) => {
-      d.classList.toggle('on', i === cur);
-      d.setAttribute('aria-selected', i === cur);
-    });
-    // Piece content animation
-    pieces.forEach((p, i) => p.classList.toggle('active', i === cur));
-    // Arrow visibility
-    if (btnPrev) btnPrev.classList.toggle('hidden', cur === 0);
-    if (btnNext) btnNext.classList.toggle('hidden', cur === TOTAL - 1);
-  }
-
-  // ── Spring RAF loop ──
-  function startRaf() {
+  function startRaf(){
     cancelAnimationFrame(rafId);
-    const tick = () => {
-      if (!isDragging) {
-        // lerp toward target — 0.09 = luxury spring feel
-        curX += (targX - curX) * 0.09;
-        if (Math.abs(targX - curX) < 0.04) curX = targX;
-      }
-      track.style.transform = `translate3d(${curX}px,0,0)`;
-      rafId = requestAnimationFrame(tick);
-    };
-    rafId = requestAnimationFrame(tick);
+    const tick=()=>{ if(!isDragging){curX+=(targX-curX)*0.09; if(Math.abs(targX-curX)<0.04)curX=targX;} track.style.transform=`translate3d(${curX}px,0,0)`; rafId=requestAnimationFrame(tick); };
+    rafId=requestAnimationFrame(tick);
   }
 
-  // ── Edge resistance helper ──
-  function clampWithResist(x) {
-    const maxX = 0;
-    const minX = -(TOTAL - 1) * slideW;
-    if (x > maxX) return x * 0.18;
-    if (x < minX) return minX + (x - minX) * 0.18;
-    return x;
-  }
+  function clamp(x){ const mx=0,mn=-(TOTAL-1)*slideW; if(x>mx)return x*.18; if(x<mn)return mn+(x-mn)*.18; return x; }
 
-  // ── Touch ──
-  wrap.addEventListener('touchstart', e => {
-    isDragging    = true;
-    touchIsHoriz  = null;
-    dragStartX    = e.touches[0].clientX;
-    touchStartY   = e.touches[0].clientY;
-    dragStartCurX = curX;
-    prevDragX     = dragStartX;
-    velX          = 0;
-  }, { passive: true });
+  function snap(){ if(Math.abs(velX)>7)setSlide(velX<0?cur+1:cur-1); else setSlide(Math.round(-curX/slideW)); }
 
-  wrap.addEventListener('touchmove', e => {
-    if (!isDragging) return;
-    const x  = e.touches[0].clientX;
-    const y  = e.touches[0].clientY;
-    const dx = x - dragStartX;
-    const dy = y - touchStartY;
+  wrap.addEventListener('touchstart',e=>{isDragging=true;touchIsHoriz=null;didDrag=false;dragStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;dragStartCurX=curX;prevDragX=dragStartX;velX=0;},{passive:true});
+  wrap.addEventListener('touchmove',e=>{
+    if(!isDragging)return;
+    const x=e.touches[0].clientX,y=e.touches[0].clientY,dx=x-dragStartX,dy=y-touchStartY;
+    if(touchIsHoriz===null&&(Math.abs(dx)>4||Math.abs(dy)>4))touchIsHoriz=Math.abs(dx)>Math.abs(dy);
+    if(!touchIsHoriz)return;
+    e.preventDefault(); velX=x-prevDragX; prevDragX=x; curX=clamp(dragStartCurX+dx); didDrag=Math.abs(dx)>6;
+  },{passive:false});
+  wrap.addEventListener('touchend',()=>{if(!isDragging)return;isDragging=false;snap();});
 
-    // Detect direction once
-    if (touchIsHoriz === null && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) {
-      touchIsHoriz = Math.abs(dx) > Math.abs(dy);
-    }
-    if (!touchIsHoriz) return; // vertical — let page/lenis handle it
+  wrap.addEventListener('mousedown',e=>{isDragging=true;dragStartX=e.clientX;dragStartCurX=curX;prevDragX=e.clientX;velX=0;didDrag=false;wrap.classList.add('dragging');e.preventDefault();});
+  window.addEventListener('mousemove',e=>{if(!isDragging)return;const dx=e.clientX-dragStartX;velX=e.clientX-prevDragX;prevDragX=e.clientX;curX=clamp(dragStartCurX+dx);didDrag=Math.abs(dx)>6;});
+  window.addEventListener('mouseup',()=>{if(!isDragging)return;isDragging=false;wrap.classList.remove('dragging');snap();});
 
-    e.preventDefault(); // horizontal — we handle it
-    velX  = x - prevDragX;
-    prevDragX = x;
-    curX  = clampWithResist(dragStartCurX + dx);
-  }, { passive: false });
+  window.addEventListener('keydown',e=>{ if(document.getElementById('lightbox').classList.contains('open'))return; if(e.key==='ArrowRight')setSlide(cur+1); if(e.key==='ArrowLeft')setSlide(cur-1); });
+  dots.forEach(d=>d.addEventListener('click',()=>setSlide(+d.dataset.i)));
+  btnP?.addEventListener('click',()=>setSlide(cur-1));
+  btnN?.addEventListener('click',()=>setSlide(cur+1));
+  window.addEventListener('resize',resize);
+  resize(); setSlide(0,true); startRaf();
 
-  wrap.addEventListener('touchend', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    snap();
-  });
-
-  // ── Mouse drag ──
-  wrap.addEventListener('mousedown', e => {
-    isDragging    = true;
-    dragStartX    = e.clientX;
-    dragStartCurX = curX;
-    prevDragX     = e.clientX;
-    velX          = 0;
-    wrap.classList.add('dragging');
-    e.preventDefault();
-  });
-
-  window.addEventListener('mousemove', e => {
-    if (!isDragging) return;
-    const dx = e.clientX - dragStartX;
-    velX  = e.clientX - prevDragX;
-    prevDragX = e.clientX;
-    curX  = clampWithResist(dragStartCurX + dx);
-  });
-
-  window.addEventListener('mouseup', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    wrap.classList.remove('dragging');
-    snap();
-  });
-
-  function snap() {
-    // Momentum: fast swipe skips to next/prev
-    if (Math.abs(velX) > 7) {
-      setSlide(velX < 0 ? cur + 1 : cur - 1);
-    } else {
-      setSlide(Math.round(-curX / slideW));
-    }
-  }
-
-  // ── Keyboard ──
-  window.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') setSlide(cur + 1);
-    if (e.key === 'ArrowLeft')  setSlide(cur - 1);
-  });
-
-  // ── Dots ──
-  dots.forEach(d => d.addEventListener('click', () => setSlide(+d.dataset.i)));
-
-  // ── Arrow buttons ──
-  btnPrev?.addEventListener('click', () => setSlide(cur - 1));
-  btnNext?.addEventListener('click', () => setSlide(cur + 1));
-
-  // ── Resize ──
-  window.addEventListener('resize', resize);
-
-  // ── Boot ──
-  resize();
-  setSlide(0, true);
-  startRaf();
+  // Expose didDrag for gallery buttons
+  wrap._getDid = ()=>didDrag;
 })();
 
-// ── 4. SCROLL REVEAL ─────────────────────────────────────
-const io = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      io.unobserve(entry.target);
-    }
+// ── LIGHTBOX ─────────────────────────────────────────────
+let lbProduct=null, lbIdx=0;
+const lb=document.getElementById('lightbox');
+const lbImg=document.getElementById('lbImg');
+const lbCounter=document.getElementById('lbCounter');
+const lbThumbs=document.getElementById('lbThumbs');
+const lbTitle=document.getElementById('lbTitle');
+const lbPrev=document.getElementById('lbPrev');
+const lbNext=document.getElementById('lbNext');
+
+function openLightbox(pid, startIdx=0){
+  lbProduct=pid;
+  const p=GALLERY[pid];
+  lbTitle.textContent=isSq?p.nameSq:p.nameEn;
+  // Build thumbs
+  lbThumbs.innerHTML='';
+  for(let i=0;i<p.count;i++){
+    const t=document.createElement('img');
+    t.src=`images/${p.folder}/${i+1}.jpg`;
+    t.className='lb-thumb'; t.dataset.i=i; t.alt='';
+    t.addEventListener('click',()=>lbShow(+t.dataset.i));
+    lbThumbs.appendChild(t);
+  }
+  lbShow(startIdx);
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+  lenis.stop();
+}
+
+function lbShow(idx){
+  const p=GALLERY[lbProduct];
+  idx=Math.max(0,Math.min(idx,p.count-1)); lbIdx=idx;
+  const src=`images/${p.folder}/${idx+1}.jpg`;
+  if(lbImg.src.endsWith(src.replace(/\//g,'\\'))||lbImg.src.includes(src.split('/').pop())){/* already loaded */}
+  lbImg.classList.add('fading');
+  const tmp=new Image(); tmp.onload=()=>{ lbImg.src=src; lbImg.classList.remove('fading'); }; tmp.src=src;
+  lbCounter.textContent=`${idx+1} / ${p.count}`;
+  lbThumbs.querySelectorAll('.lb-thumb').forEach((t,i)=>{ t.classList.toggle('on',i===idx); });
+  lbPrev.classList.toggle('hidden',idx===0);
+  lbNext.classList.toggle('hidden',idx===p.count-1);
+  // Preload adjacent
+  [idx-1,idx+1].forEach(j=>{ if(j>=0&&j<p.count){const pi=new Image();pi.src=`images/${p.folder}/${j+1}.jpg`;} });
+  // Scroll thumb into view
+  const th=lbThumbs.children[idx]; if(th)th.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow=''; lenis.start(); lbProduct=null; }
+
+document.getElementById('lbClose').addEventListener('click',closeLightbox);
+lbPrev.addEventListener('click',()=>lbShow(lbIdx-1));
+lbNext.addEventListener('click',()=>lbShow(lbIdx+1));
+lb.addEventListener('click',e=>{ if(e.target===lb)closeLightbox(); });
+
+// Touch swipe in lightbox
+let lbTx=0;
+lb.addEventListener('touchstart',e=>lbTx=e.touches[0].clientX,{passive:true});
+lb.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-lbTx; if(Math.abs(dx)>40)lbShow(lbIdx+(dx<0?1:-1)); },{passive:true});
+window.addEventListener('keydown',e=>{ if(!lb.classList.contains('open'))return; if(e.key==='ArrowLeft')lbShow(lbIdx-1); if(e.key==='ArrowRight')lbShow(lbIdx+1); if(e.key==='Escape')closeLightbox(); });
+
+// Gallery triggers
+document.querySelectorAll('.piece-gallery-btn').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    const wrap=document.getElementById('carouselWrap');
+    if(wrap._getDid&&wrap._getDid())return;
+    openLightbox(btn.dataset.product,0);
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+});
+
+// ── ORDER SHEET ───────────────────────────────────────────
+let activeProduct=null, selSize=null, selPay='cod';
+const orderSheet=document.getElementById('orderSheet');
+const orderBg=document.getElementById('orderBg');
+const orderName=document.getElementById('orderName');
+const orderSend=document.getElementById('orderSend');
+
+function openOrder(pid){
+  activeProduct=pid;
+  selSize=null; selPay='cod';
+  const p=GALLERY[pid];
+  orderName.textContent=isSq?p.nameSq:p.nameEn;
+  document.querySelectorAll('.size-pill').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.pay-pill').forEach(p=>{ p.classList.toggle('on',p.dataset.pay==='cod'); });
+  refreshOrderLink();
+  orderSheet.classList.add('open'); orderBg.classList.add('open');
+  lenis.stop();
+}
+
+function closeOrder(){ orderSheet.classList.remove('open'); orderBg.classList.remove('open'); lenis.start(); }
+
+function refreshOrderLink(){
+  const ready=!!selSize;
+  orderSend.classList.toggle('disabled',!ready);
+  if(!ready||!activeProduct)return;
+  const p=GALLERY[activeProduct];
+  const name=isSq?p.nameSq:p.nameEn;
+  const payEn=selPay==='cod'?'Cash on Delivery':'Bank Transfer';
+  const paySq=selPay==='cod'?'Para me Dorëzim':'Transfer Bankar';
+  const msgEn=`Hi! I'd like to order the ${name} in size ${selSize}. Payment: ${payEn}. 🛍️`;
+  const msgSq=`Përshëndetje! Dëshiroj të porosis ${name} madhësia ${selSize}. Pagesa: ${paySq}. 🛍️`;
+  const msg=isSq?msgSq:msgEn;
+  orderSend.href=`https://wa.me/355698998100?text=${encodeURIComponent(msg)}`;
+}
+
+document.querySelectorAll('.size-pill').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.size-pill').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on'); selSize=btn.dataset.size; refreshOrderLink();
+  });
+});
+
+document.querySelectorAll('.pay-pill').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.pay-pill').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on'); selPay=btn.dataset.pay; refreshOrderLink();
+  });
+});
+
+document.getElementById('orderClose').addEventListener('click',closeOrder);
+orderBg.addEventListener('click',closeOrder);
+
+// Wire WA buttons to order sheet
+document.querySelectorAll('.btn-wa').forEach(btn=>{
+  btn.addEventListener('click',()=>openOrder(btn.dataset.product));
+});
+
+// ── SCROLL REVEAL ─────────────────────────────────────────
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} }),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
