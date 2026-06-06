@@ -231,6 +231,13 @@
       .piece-gallery-btn { right:55%; height:100%; }
       .piece-count       { right:calc(55% + 16px); }
 
+      /* CRITICAL: image was spanning full piece width (100vw).
+         Limit it to the left 45% so cover scales correctly. */
+      .piece-img {
+        right:55%;
+        object-position:center center;
+      }
+
       /* Info panel fills right 55% */
       .piece-body {
         left:45%;
