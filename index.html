@@ -232,11 +232,14 @@
       .piece-gallery-btn { right:55%; height:100%; }
       .piece-count       { right:calc(55% + 16px); }
 
-      /* Show full image with no cropping — contain scales to fit */
+      /* Show full image with no cropping.
+         width:45% + right:auto properly overrides the base inset:0 + width:100%.
+         right:55% alone was ignored by CSS (over-constrained abs positioning). */
       .piece-img {
-        right:55%;
+        width:45%;
+        right:auto;
         object-fit:contain;
-        object-position:center center;
+        object-position:center;
         background:var(--cream);
       }
 
