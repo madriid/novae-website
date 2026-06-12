@@ -227,15 +227,17 @@
         border-left:1px solid var(--border);
       }
 
-      .piece-veil        { right:55%; }
+      /* Veil not needed on desktop — text lives in the cream panel */
+      .piece-veil        { display:none; }
       .piece-gallery-btn { right:55%; height:100%; }
       .piece-count       { right:calc(55% + 16px); }
 
-      /* CRITICAL: image was spanning full piece width (100vw).
-         Limit it to the left 45% so cover scales correctly. */
+      /* Show full image with no cropping — contain scales to fit */
       .piece-img {
         right:55%;
+        object-fit:contain;
         object-position:center center;
+        background:var(--cream);
       }
 
       /* Info panel fills right 55% */
